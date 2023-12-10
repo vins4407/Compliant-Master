@@ -22,7 +22,7 @@ def new_win():
    subprocess.run(["python", "login.py"])
 
 Frame(w, width=427, height=250, bg='#272727').place(x=0,y=0)
-label1=Label(w, text='Compliant Master', fg='white', bg='#272727') #decorate it 
+label1=Label(w, text='Compliant Master', fg='white', bg='#272727')  
 label1.configure(font=("Game Of Squids", 24, "bold"))   
 label1.place(x=80,y=90)
 
