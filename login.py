@@ -23,15 +23,7 @@ app.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
 def button_function():
      subprocess.run(["python", "Dashboard.py"])
      app.destroy()
-   
-   
-    
-    
-   
 
-   
-
-   
 img1 = ImageTk.PhotoImage(Image.open("./assets/jojo.jpg"))
 l1 = customtkinter.CTkLabel(master=app, image=img1)
 l1.pack()
