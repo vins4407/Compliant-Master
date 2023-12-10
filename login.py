@@ -9,7 +9,6 @@ customtkinter.set_default_color_theme("green")  # Themes: blue (default), dark-b
 app = customtkinter.CTk()
 app.title('Login')
 
-# Calculate the center position for the window
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 
