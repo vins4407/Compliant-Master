@@ -12,6 +12,7 @@ class MyTabView(ctk.CTkTabview):
         self.add("Scan 2")
         self.add("Scan 3")
 
+
         self.checkbox_frames = {}
         for tab_name in ["All", "Hippa", "Scan 1", "Scan 2", "Scan 3"]:
             tab_frame = self.tab(tab_name)
@@ -24,6 +25,7 @@ class MyTabView(ctk.CTkTabview):
             frame.pack(fill="both", expand=True)
 
             checkboxes_tab = []
+
             for i in range(9):
                 checkbox_id = f"{tab_name}_Option_{i + 1}"
                 checkbox_var = ctk.IntVar()
@@ -32,7 +34,6 @@ class MyTabView(ctk.CTkTabview):
 
                 if tab_name == "All":
                     checkbox_var.set(1)
-
                 elif tab_name == "Hippa" and (i + 1) in [1, 3]:
                     checkbox_var.set(1)
                 elif tab_name == "Scan 1" and (i + 1) in [8, 9]:
@@ -72,8 +73,8 @@ class App(ctk.CTk):
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
 
-        window_width = 500
-        window_height = 500
+        window_width = 600
+        window_height = 600
 
         x_position = (screen_width - window_width) // 2
         y_position = (screen_height - window_height) // 2

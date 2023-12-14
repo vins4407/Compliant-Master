@@ -1,7 +1,11 @@
 import subprocess
 import tkinter as tk
 import customtkinter
-from PIL import ImageTk, Image
+from PIL import Image
+from PIL import ImageTk
+import os
+import getpass
+
 
 customtkinter.set_appearance_mode("System")  # Modes: system (default), light, dark
 customtkinter.set_default_color_theme("green")  # Themes: blue (default), dark-blue, green
@@ -13,7 +17,7 @@ screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 
 window_width = 600
-window_height = 440
+window_height = 600
 
 x_position = (screen_width - window_width) // 2
 y_position = (screen_height - window_height) // 2
@@ -21,8 +25,22 @@ y_position = (screen_height - window_height) // 2
 app.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
 
 def button_function():
-     subprocess.run(["python", "Dashboard.py"])
-     app.destroy()
+    username = entry1.get()  # Get the entered username
+    password = entry2.get()  # Get the entered password
+    
+        # Use sudo to execute a command that requires root privileges
+    command = ["sudo", "-S", "-u", "root", "ls"]
+    process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    output, error = process.communicate(input=password.encode())
+        
+    if process.returncode == 0:
+            app.destroy()
+            # If the command succeeds, the username and password are correct
+            print("Root user detected. Proceeding with the Dashboard.")
+            subprocess.run(["python3", "Dashboard.py"])
+            app.destroy()
+
+
 
 img1 = ImageTk.PhotoImage(Image.open("./assets/jojo.jpg"))
 l1 = customtkinter.CTkLabel(master=app, image=img1)

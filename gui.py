@@ -1,4 +1,3 @@
-
 import subprocess
 from tkinter import *
 from tkinter import font
@@ -19,7 +18,7 @@ w.overrideredirect(1)
 
 #new window to open
 def new_win():
-   subprocess.run(["python", "login.py"])
+   subprocess.run(["python3", "login.py"])
 
 Frame(w, width=427, height=250, bg='#272727').place(x=0,y=0)
 label1=Label(w, text='Compliant Master', fg='white', bg='#272727')  

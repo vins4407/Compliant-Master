@@ -4,8 +4,9 @@ import os
 import subprocess
 
 file_path = os.path.dirname(os.path.realpath(__file__))
-image_1 = customtkinter.CTkImage(Image.open(file_path + "./assets/create.png"), size=(35, 35))
-image_2 = customtkinter.CTkImage(Image.open(file_path + "./assets/upload.png"), size=(40, 40))
+print(file_path)
+image_1 = customtkinter.CTkImage(Image.open(file_path + "/assets/create.png"), size=(35, 35))
+image_2 = customtkinter.CTkImage(Image.open(file_path + "/assets/upload.png"), size=(40, 40))
 
 app = customtkinter.CTk()
 app.title("Policy Management")
@@ -24,7 +25,7 @@ frame = customtkinter.CTkFrame(master=app, corner_radius=20)
 frame.pack(pady=20, padx=20, fill="both", expand=True)
 
 def create_policy_clicked():
-    subprocess.run(["python", "Createpolicy.py"])
+    subprocess.run(["python3", "Createpolicy.py"])
 
 button_1 = customtkinter.CTkButton(
     master=frame,

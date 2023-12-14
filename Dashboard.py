@@ -6,11 +6,13 @@ import customtkinter
 customtkinter.set_default_color_theme("green")
 
 def logout():
+    app.destroy()
+    subprocess.run(["python3","login.py"])
     print("Logout clicked")
 
 def button_click(responsibility):
     if responsibility == "Responsibility 1":
-        subprocess.run(["python", "Policy.py"])
+        subprocess.run(["python3", "Policy.py"])
     elif responsibility == "Responsibility 2":
         print("Check Compliant Status clicked")
     elif responsibility == "Responsibility 3":
@@ -32,7 +34,7 @@ app.title("Welcome Root")
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 
-window_width = 580
+window_width = 600
 window_height = 600
 
 x_position = (screen_width - window_width) // 2
