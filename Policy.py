@@ -9,7 +9,7 @@ image_2 = customtkinter.CTkImage(Image.open(file_path + "./assets/upload.png"), 
 
 app = customtkinter.CTk()
 app.title("Policy Management")
-app_width, app_height = 400, 300
+app_width, app_height = 580, 600
 
 # Calculate the center position for the window
 screen_width = app.winfo_screenwidth()
