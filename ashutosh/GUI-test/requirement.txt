@@ -1,0 +1,9 @@
+# requirements.txt
+
+# Packages required for the script
+tk
+multipledispatch
+
+
+# Note: 'tk' is included because you are using tkinter in your script.
+# 'multipledispatch' is included because it's used in your script.
