@@ -24,7 +24,7 @@ def logout():
 
 def go_back_to_dashboard():
     hide_all_screens()  
-    main_frame.grid(row=0, column=0, padx=160, pady=20, rowspan=3, columnspan=3, sticky="nsew")
+    main_frame.grid(row=0, column=0, padx=19, pady=20, rowspan=2, columnspan=2, sticky="nsew")
 
     
     # Reveal the dashboard content here

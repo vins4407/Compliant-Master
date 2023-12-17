@@ -5,7 +5,7 @@
             "certing",
             "SEBI"
         ],
-        "execFile": "/home/ashutosh/Desktop/CompliantMaster/Compliant-Master/blockUsb.sh"
+        "execFile": "/home/vinayak1506/Desktop/sih/Compliant-Master/blockUsb.sh"
     },
     "1002": {
         "name": "tor",
@@ -21,7 +21,7 @@
             "certing",
             "SEBI"
         ],
-        "execFile": "/home/ashutosh/Desktop/CompliantMaster/Compliant-Master/blockSsh.sh"
+        "execFile": "/home/vinayak1506/Desktop/sih/Compliant-Master/blockSsh.sh"
     },
     "1004": {
         "name": "ufw",
