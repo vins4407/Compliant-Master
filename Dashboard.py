@@ -27,7 +27,7 @@ def go_back_to_dashboard():
     main_frame.grid(row=0, column=0, padx=19, pady=20, rowspan=2, columnspan=2, sticky="nsew")
 
     
-    # Reveal the dashboard content here
+# Reveal the dashboard content here
 
 def button_click(responsibility):
     hide_all_screens()

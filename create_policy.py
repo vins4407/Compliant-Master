@@ -4,8 +4,6 @@ from tkinter import Listbox, END, MULTIPLE, messagebox, ttk
 import json
 import subprocess
 
-
-
 # Create Main Loop:
 
 app = ctk.CTk()
@@ -55,14 +53,14 @@ def on_submit(data, selected_option_listbox):
     
     print("Selected Items:", selected_items)
     if not selected_items:
-        messagebox.showinfo("No Selection", "Please select at least one item.")
+        ctk.CTk.showinfo("No Selection", "Please select at least one item.")
         return
 
     show_confirmation_screen(selected_items)
 
 
 def show_confirmation_screen(selected_items):
-    popup = ctk.CTk()
+    popup = ctk.CTkFrame(master=app, corner_radius=20)
     popup.title("Confirmation")
 
     window_width = 300
@@ -88,7 +86,6 @@ def show_confirmation_screen(selected_items):
     cancel_button = ctk.CTkButton(popup, text="Cancel", command=popup.destroy )
     cancel_button.pack(pady=10)
 
-    popup.mainloop()
 
 
 
@@ -140,20 +137,22 @@ data = load_data('data.json')
 
 # Draggable UI using Frames
 
+main_frame = ctk.CTkFrame(app, corner_radius=20)
+main_frame.grid(row=0, column=0, sticky="nsew")
 
-welcome_label = ctk.CTkLabel(app, text="Welcome Root", font=("Arial", 24))
+welcome_label = ctk.CTkLabel(main_frame, text="Welcome Root", font=("Arial", 24))
 welcome_label.grid(row=0, column=0, padx=20, pady=20, sticky="w")
 
-logout_button = ctk.CTkButton(app, text="Back")
+logout_button = ctk.CTkButton(main_frame, text="exit", command=app.destroy )
 logout_button.grid(row=0, column=2, padx=20, pady=20, sticky="e")
 
-main_frame = ctk.CTkFrame(app)
-main_frame.grid(row=1, column=0, columnspan=3)
+Selection_frame = ctk.CTkFrame(main_frame)
+Selection_frame.grid(row=1, column=0, columnspan=3)
 
-left_frame = ctk.CTkFrame(main_frame)
+left_frame = ctk.CTkFrame(Selection_frame)
 left_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
-right_frame = ctk.CTkFrame(main_frame)
+right_frame = ctk.CTkFrame(Selection_frame)
 right_frame.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
 
 label_available = ctk.CTkLabel(left_frame, text="Available Rules", font=("Helvetica", 12))
@@ -163,6 +162,8 @@ label_selected = ctk.CTkLabel(right_frame, text="Selected Rules", font=("Helveti
 label_selected.pack(pady=5)
 
 
+
+# frame-
 
 available_option_listbox = DragDropListbox(left_frame, None, "available_options", selectmode=MULTIPLE)
 selected_option_listbox = DragDropListbox(right_frame, available_option_listbox, "selected_options", selectmode=MULTIPLE)
@@ -181,7 +182,7 @@ available_option_listbox.bind('<Double-Button-1>', lambda event: on_double_left_
 selected_option_listbox.bind('<Double-Button-1>', lambda event: on_double_left_click(event, selected_option_listbox, available_option_listbox))
 
 
-submit_button = ttk.Button(app, text="Submit", command=lambda: on_submit(data, selected_option_listbox))
+submit_button = ctk.CTkButton(main_frame, text="Submit", command=lambda: on_submit(data, selected_option_listbox))
 submit_button.grid(row=2, column=1, pady=10)
 
 app.mainloop()

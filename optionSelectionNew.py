@@ -19,6 +19,7 @@ class DragDropListbox(tk.Listbox):
         self.other_listbox.insert(tk.END, cur_item)
 
 
+
 def load_data(file_path):
     try:
         with open(file_path) as f:
