@@ -6,6 +6,17 @@ import customtkinter
 customtkinter.set_default_color_theme("green")
 app = ctk.CTk()
 app.title("Welcome Root")
+screen_width = app.winfo_screenwidth()
+screen_height = app.winfo_screenheight()
+
+window_width = 580
+window_height = 600
+
+x_position = (screen_width - window_width) // 2
+y_position = (screen_height - window_height) // 2
+
+app.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
+
 
 def logout():
     print("Logout clicked")
@@ -43,19 +54,10 @@ def show_screen_policy():
     hide_all_screens()  
     Options_frame.grid(row=2, column=0, padx=160, pady=20, rowspan=3, columnspan=3, sticky="nsew")
 
+# Frame-Main
 main_frame = ctk.CTkFrame(app, corner_radius=20)
 main_frame.grid(row=0, column=0, sticky="nsew")
 
-screen_width = app.winfo_screenwidth()
-screen_height = app.winfo_screenheight()
-
-window_width = 580
-window_height = 600
-
-x_position = (screen_width - window_width) // 2
-y_position = (screen_height - window_height) // 2
-
-app.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
 
 # Background
 pil_image = Image.open("./assets/jojo.jpg")
