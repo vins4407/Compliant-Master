@@ -25,7 +25,7 @@ frame = customtkinter.CTkFrame(master=app, corner_radius=20)
 frame.pack(pady=20, padx=20, fill="both", expand=True)
 
 def create_policy_clicked():
-    subprocess.run(["python3", "Createpolicy.py"])
+    subprocess.run(["python3", "create_policy.py"])
 
 button_1 = customtkinter.CTkButton(
     master=frame,

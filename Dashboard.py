@@ -4,10 +4,19 @@ import subprocess
 import customtkinter
 
 customtkinter.set_default_color_theme("green")
+app = ctk.CTk()
+app.title("Welcome Root")
 
 def logout():
     print("Logout clicked")
     app.destroy()
+
+def go_back_to_dashboard():
+    hide_all_screens()  
+    main_frame.grid(row=0, column=0, padx=160, pady=20, rowspan=3, columnspan=3, sticky="nsew")
+
+    
+    # Reveal the dashboard content here
 
 def button_click(responsibility):
     hide_all_screens()
@@ -32,10 +41,10 @@ def hide_all_screens():
 
 def show_screen_policy():
     hide_all_screens()  
-    frame_policy.grid(row=1, column=0, padx=160, pady=20, rowspan=3, columnspan=3, sticky="nsew")
+    Options_frame.grid(row=2, column=0, padx=160, pady=20, rowspan=3, columnspan=3, sticky="nsew")
 
-app = ctk.CTk()
-app.title("Welcome Root")
+main_frame = ctk.CTkFrame(app, corner_radius=20)
+main_frame.grid(row=0, column=0, sticky="nsew")
 
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
@@ -51,17 +60,13 @@ app.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
 # Background
 pil_image = Image.open("./assets/jojo.jpg")
 ctk_image = ctk.CTkImage(pil_image)
-background_label = ctk.CTkLabel(app, image=ctk_image, text="", compound="center")  # Set text to an empty string and use "center" compound
+background_label = ctk.CTkLabel(main_frame, image=ctk_image, text="", compound="center")
 background_label.grid(row=0, column=0, rowspan=4, columnspan=3, sticky="nsew")
 
-
-
-
-
-welcome_label = ctk.CTkLabel(app, text="Welcome Root", font=("Arial", 24))
+welcome_label = ctk.CTkLabel(main_frame, text="Welcome Root", font=("Arial", 24))
 welcome_label.grid(row=0, column=0, padx=20, pady=20, sticky="w")
 
-logout_button = ctk.CTkButton(app, text="Logout", command=logout)
+logout_button = ctk.CTkButton(main_frame, text="Logout", command=logout)
 logout_button.grid(row=0, column=2, padx=20, pady=20, sticky="e")
 
 buttons_info = [
@@ -74,32 +79,43 @@ buttons_info = [
 ]
 
 for i, button_info in enumerate(buttons_info):
-    button = ctk.CTkButton(app, text=button_info["name"], width=120, height=120, command=lambda resp=button_info["responsibility"]: button_click(resp))
+    button = ctk.CTkButton(main_frame, text=button_info["name"], width=120, height=120, command=lambda resp=button_info["responsibility"]: button_click(resp))
     button.grid(row=i // 3 + 1, column=i % 3, padx=20, pady=20)
 
-
-additional_button = ctk.CTkButton(app, text="System Info", command=lambda: button_click("Additional Responsibility"), width=445, height=110)
+additional_button = ctk.CTkButton(main_frame, text="System Info", command=lambda: button_click("Additional Responsibility"), width=445, height=110)
 additional_button.grid(row=len(buttons_info) // 3 + 2, column=0, padx=20, pady=20, columnspan=3)
 
-#frames-Policy
+#frames-Option
 
+Options_frame = ctk.CTkFrame(master=app, corner_radius=20)
 
-frame_policy = ctk.CTkFrame(master=app, corner_radius=20)
+back_button = ctk.CTkButton(
+    master=Options_frame,
+    text="Back to Dashboard",
+    corner_radius=8,
+    width=200,
+    height=30,
+    font=("Arial", 20),
+    border_spacing=10,
+)
+back_button.grid(row=0, column=0, padx=20, pady=20)
+back_button.configure(command=go_back_to_dashboard)
+
 
 button_1 = ctk.CTkButton(
-    master=frame_policy,
+    master=Options_frame,
     text="Create Policy",
     corner_radius=8,
     width=200,
     height=30,
     font=("Arial", 20),
     border_spacing=10,
-    command=lambda: subprocess.run(["python3", "Createpolicy.py"]),
+    command=lambda: subprocess.run(["python3", "create_policy.py"]),
 )
 button_1.grid(row=1, column=0, padx=20, pady=20)
 
 button_2 = ctk.CTkButton(
-    master=frame_policy,
+    master=Options_frame,
     text="Upload Policy",
     corner_radius=8,
     width=200,
@@ -108,6 +124,10 @@ button_2 = ctk.CTkButton(
     border_spacing=10,
 )
 button_2.grid(row=2, column=0, padx=20, pady=20)
+
+
+# Frame-SelectPolicy
+
 
 
 
