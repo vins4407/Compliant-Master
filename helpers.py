@@ -1,14 +1,19 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import filedialog
 import os
 import zipfile
 from cryptography.fernet import Fernet
 import hashlib
 import json
 import shutil
+from CTkMessagebox import CTkMessagebox
+from customtkinter import CTk, filedialog
 
 # Use a custom key (replace with your own key)
+username = os.getlogin()
+
 custom_key = b'iC3NK3fUm-WfXJpu-EEUPvuhRG_FaG_czpjhKSsB4tM='
+
 cipher = Fernet(custom_key)
 
 
@@ -60,9 +65,10 @@ def zip_config_folder():
                         zip_file.write(file_path, arcname=arcname)
                 zip_file.writestr("encrypted_hashes.bin", encrypted_hashes)
 
-            messagebox.showinfo("Success", "Config folder zipped successfully!")
+            CTkMessagebox(message="Success! Config folder zipped successfully.",
+                  icon="check", option_1="Done")
     except Exception as e:
-        messagebox.showerror("Error", f"An error occurred: {str(e)}")
+        CTkMessagebox(title="Error", message=f"Something went wrong!!! \\n An error occurred: {str(e)}", icon="cancel")
 
 
 def unzip_and_verify():
@@ -90,22 +96,9 @@ def unzip_and_verify():
                     shutil.rmtree(config_folder_path, ignore_errors=True)
 
                     zip_ref.extractall(extract_path)
-                    messagebox.showinfo("Success", "Zip file uploaded and config folder extracted successfully!")
+                    CTkMessagebox(message= "Success! ,Zip file uploaded and config folder extracted successfully!", icon="check", option_1="Done")
+
     except Exception as e:
-        messagebox.showerror("Error", f"An error occurred: {str(e)}")
+        CTkMessagebox(title="Error", message=f"Something went wrong!!! \\n An error occurred: {str(e)}", icon="cancel")
 
 
-window = tk.Tk()
-window.title("Download and Upload Page")
-window.geometry("600x600")
-
-canvas = tk.Canvas(window, width=600, height=600, bg="white")
-canvas.pack()
-
-download_button = tk.Button(canvas, text="Download Now!", command=zip_config_folder)
-download_button.place(relx=0.3, rely=0.5, anchor="center")
-
-upload_button = tk.Button(canvas, text="Upload Now!", command=unzip_and_verify)
-upload_button.place(relx=0.7, rely=0.5, anchor="center")
-
-window.mainloop()

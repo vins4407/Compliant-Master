@@ -4,21 +4,26 @@ from tkinter import Listbox, END, MULTIPLE, messagebox, ttk
 import json
 import subprocess
 from CTkMessagebox import CTkMessagebox
-
+from customtkinter import CTk, filedialog
+import os
+import zipfile
+from helpers import *
 # Create Main Loop:
 
 app = ctk.CTk()
 app.title("Rules")
+ctk.set_default_color_theme("green")
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 
-window_width = 580
+window_width = 600
 window_height = 600
 
 x_position = (screen_width - window_width) // 2
 y_position = (screen_height - window_height) // 2
 
 app.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
+
 
 
 
@@ -38,9 +43,48 @@ class DragDropListbox(Listbox):
         self.delete(cur_index)
         self.other_listbox.insert(END, cur_item)
 
+# # Download zip/json/yaml file  
+
+# def download_yaml(selected_items):
+#     for selected_item in selected_items:
+#         print(f"Downloading YAML for {selected_item}")
+#         config_folder_path = "config"  # Replace with the actual path to your "config" folder
+
+#     try:
+#         # Prompt user for the destination path to save the zip file
+#         destination_path = filedialog.askdirectory(title="Select Destination Folder")
+
+#         if destination_path:
+#             # Create a zip file named "config_archive.zip" in the selected destination
+#             zip_file_path = os.path.join(destination_path, "config_archive.zip")
+
+#             with zipfile.ZipFile(zip_file_path, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+#                 # Add all files and subdirectories from the Config folder to the zip archive
+#                 for root, dirs, files in os.walk(config_folder_path):
+#                     for file in files:
+#                         file_path = os.path.join(root, file)
+#                         arcname = os.path.relpath(file_path, config_folder_path)
+#                         zip_file.write(file_path, arcname)
+
+#             # Display a success message
+#             CTkMessagebox(message="Success! Config folder zipped successfully.",
+#                   icon="check", option_1="Done")
+
+#     except Exception as e:
+#         # Display an error message if something goes wrong
+#         CTkMessagebox(title="Error", message=f"Something went wrong!!! \\n An error occurred: {str(e)}", icon="cancel")
+
+
 
 
 # Fuctions
+
+def hide_all_screens():
+    for widget in app.winfo_children():
+        widget.grid_forget()
+
+
+
 def load_data(file_path):
     try:
         with open(file_path) as f:
@@ -64,7 +108,7 @@ def show_confirmation_screen(selected_items):
     popup.title("Confirmation")
 
     window_width = 300
-    window_height = 150
+    window_height = 200
 
     screen_width = popup.winfo_screenwidth()
     screen_height = popup.winfo_screenheight()
@@ -74,26 +118,31 @@ def show_confirmation_screen(selected_items):
 
     popup.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
 
+    # def download_yaml_wrapper():
+    #     popup.destroy()
+    #     download_yaml(selected_items)
+    #     popup.destroy()
+
+    def harden_now_wrapper():
+        popup.destroy()
+        harden_now(selected_items)
+        popup.destroy()
+
+
     label = ctk.CTkLabel(popup, text=f"Confirm action for {', '.join(selected_items)}", font=("Arial", 14))
     label.pack(pady=10)
 
-    download_button = ctk.CTkButton(popup, text="Download Policy", command=lambda: download_yaml(selected_items))
-    download_button.pack(side="left", padx=10)
+    download_button = ctk.CTkButton(popup, text="Download Policy", command=zip_config_folder )
+    download_button.pack( padx=10)
 
-    hardening_button = ctk.CTkButton(popup, text="Start Hardening", command=lambda: harden_now(selected_items))
-    hardening_button.pack(side="right", padx=10)
+    hardening_button = ctk.CTkButton(popup, text="Start Hardening", command=harden_now_wrapper)
+    hardening_button.pack( padx=10,pady=10)
 
-    cancel_button = ctk.CTkButton(popup, text="Cancel", command=popup.destroy )
+    cancel_button = ctk.CTkButton(popup, text="Cancel",  command=popup.destroy )
+
     cancel_button.pack(pady=10)
 
     popup.mainloop()
-
-
-
-
-def download_yaml(selected_items):
-    for selected_item in selected_items:
-        print(f"Downloading YAML for {selected_item}")
 
 def harden_now(selected_items):
     for selected_item in selected_items:
@@ -101,29 +150,37 @@ def harden_now(selected_items):
         selected_id, selected_exec_file = find_selected_details(selected_item, data)
         execute_script_and_display_result(selected_exec_file)
 
+def execute_script_and_display_result(exec_file):
+    output_frame = ctk.CTkFrame(app, corner_radius=3)
+    output_label=ctk.CTkLabel(output_frame,text="Script Execution Result", font=("Arial", 24))
+    output_label.grid(row=0, column=0, padx=20, pady=10, sticky="w")
+  # Set the parent window
+
+    output_text = ctk.CTkTextbox(output_frame, wrap=ctk.WORD, width=500, height=300, font=("Arial", 12))
+    output_text.grid(row=1, column=0, padx=20, pady=10, sticky="w")
+    def show_frame():
+        hide_all_screens()  
+        output_frame.grid(row=0, column=0, padx=16, pady=20, rowspan=3, columnspan=3, sticky="nsew")
+        app.update()
+    
+    show_frame()
+
+    try:
+        process = subprocess.run(['bash', exec_file], text=True, stdout=subprocess.PIPE, check=True)
+        output_text.insert(ctk.END, process.stdout)
+    except subprocess.CalledProcessError as e:
+        output_text.insert(ctk.END, f"Error executing script:\n{e}")
+
+    output_frame.grab_set()
+      # Make the output window modal
+
+
 def find_selected_details(selected_name, data):
     for id, details in data.items():
         if details['name'] == selected_name:
             return id, details.get('execFile', 'Exec file not found')
     return None, None
 
-def execute_script_and_display_result(exec_file):
-    output_window = tk.Toplevel(app)
-    output_window.title("Script Execution Result")
-    output_window.geometry("600x400")
-    output_window.transient(app)  # Set the parent window
-
-    output_text = tk.Text(output_window, wrap=tk.WORD, width=50, height=10)
-    output_text.pack(padx=10, pady=10)
-
-    try:
-        process = subprocess.run(['bash', exec_file], text=True, stdout=subprocess.PIPE, check=True)
-        output_text.insert(tk.END, process.stdout)
-    except subprocess.CalledProcessError as e:
-        output_text.insert(tk.END, f"Error executing script:\n{e}")
-
-    output_window.grab_set()  # Make the output window modal
-    output_window.update_idletasks()
 
 
 def on_double_left_click(event, source_listbox, destination_listbox):
@@ -131,6 +188,11 @@ def on_double_left_click(event, source_listbox, destination_listbox):
     cur_item = source_listbox.get(cur_index)
     source_listbox.delete(cur_index)
     destination_listbox.insert(tk.END, cur_item)
+
+def exit():
+    app.destroy()
+    subprocess.run(["python3", "Dashboard.py", "--show-frame", "Options"])
+
 
 
 # Read data from data.json
@@ -145,7 +207,8 @@ main_frame.grid(row=0, column=0, sticky="nsew")
 welcome_label = ctk.CTkLabel(main_frame, text="Welcome Root", font=("Arial", 24))
 welcome_label.grid(row=0, column=0, padx=20, pady=20, sticky="w")
 
-logout_button = ctk.CTkButton(main_frame, text="exit", command=app.destroy )
+logout_button = ctk.CTkButton(main_frame, text="exit", command=exit ,font=("Arial", 20),
+)
 logout_button.grid(row=0, column=2, padx=20, pady=20, sticky="e")
 
 Selection_frame = ctk.CTkFrame(main_frame)
@@ -157,15 +220,12 @@ left_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 right_frame = ctk.CTkFrame(Selection_frame)
 right_frame.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
 
-label_available = ctk.CTkLabel(left_frame, text="Available Rules", font=("Helvetica", 12))
+label_available = ctk.CTkLabel(left_frame, text="Available Rules", font=("Helvetica", 20))
 label_available.pack(pady=5)
 
-label_selected = ctk.CTkLabel(right_frame, text="Selected Rules", font=("Helvetica", 12))
+label_selected = ctk.CTkLabel(right_frame, text="Selected Rules", font=("Helvetica", 20))
 label_selected.pack(pady=5)
 
-
-
-# frame-
 
 available_option_listbox = DragDropListbox(left_frame, None, "available_options", selectmode=MULTIPLE)
 selected_option_listbox = DragDropListbox(right_frame, available_option_listbox, "selected_options", selectmode=MULTIPLE)
@@ -184,7 +244,9 @@ available_option_listbox.bind('<Double-Button-1>', lambda event: on_double_left_
 selected_option_listbox.bind('<Double-Button-1>', lambda event: on_double_left_click(event, selected_option_listbox, available_option_listbox))
 
 
-submit_button = ctk.CTkButton(main_frame, text="Submit", command=lambda: on_submit(data, selected_option_listbox))
+submit_button = ctk.CTkButton(main_frame, text="Submit", command=lambda: on_submit(data, selected_option_listbox),     font=("Arial", 20))
 submit_button.grid(row=2, column=1, pady=10)
 
 app.mainloop()
+
+

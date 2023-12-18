@@ -2,6 +2,8 @@ import customtkinter as ctk
 from PIL import Image, ImageTk
 import subprocess
 import customtkinter
+import sys
+from helpers import *
 
 customtkinter.set_default_color_theme("green")
 app = ctk.CTk()
@@ -9,8 +11,9 @@ app.title("Welcome Root")
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 
-window_width = 580
+window_width = 600
 window_height = 600
+
 
 x_position = (screen_width - window_width) // 2
 y_position = (screen_height - window_height) // 2
@@ -53,6 +56,12 @@ def hide_all_screens():
 def show_screen_policy():
     hide_all_screens()  
     Options_frame.grid(row=2, column=0, padx=160, pady=20, rowspan=3, columnspan=3, sticky="nsew")
+    app.update()
+
+def create_policy():
+    app.destroy()
+    subprocess.run(["python3", "create_policy.py"])
+    app.destroy()
 
 # Frame-Main
 main_frame = ctk.CTkFrame(app, corner_radius=20)
@@ -91,6 +100,12 @@ additional_button.grid(row=len(buttons_info) // 3 + 2, column=0, padx=20, pady=2
 
 Options_frame = ctk.CTkFrame(master=app, corner_radius=20)
 
+file_path = os.path.dirname(os.path.realpath(__file__))
+print(file_path)
+image_1 = customtkinter.CTkImage(Image.open(file_path + "/assets/create.png"), size=(35, 35))
+image_2 = customtkinter.CTkImage(Image.open(file_path + "/assets/upload.png"), size=(40, 40))
+
+
 back_button = ctk.CTkButton(
     master=Options_frame,
     text="Back to Dashboard",
@@ -106,31 +121,39 @@ back_button.configure(command=go_back_to_dashboard)
 
 button_1 = ctk.CTkButton(
     master=Options_frame,
+    image=image_1,
     text="Create Policy",
     corner_radius=8,
     width=200,
     height=30,
     font=("Arial", 20),
     border_spacing=10,
-    command=lambda: subprocess.run(["python3", "create_policy.py"]),
+    command=create_policy,
 )
 button_1.grid(row=1, column=0, padx=20, pady=20)
 
 button_2 = ctk.CTkButton(
     master=Options_frame,
+    image=image_2,
     text="Upload Policy",
     corner_radius=8,
     width=200,
     height=30,
     font=("Arial", 20),
     border_spacing=10,
+    command=unzip_and_verify
 )
 button_2.grid(row=2, column=0, padx=20, pady=20)
 
 
-# Frame-SelectPolicy
 
-
+if __name__ == "__main__":
+    # Check if the command-line argument is provided
+    if "--show-frame" in sys.argv and "Options" in sys.argv:
+        show_screen_policy()  # Show the Options frame
+    else:
+        # Your existing main loop code here
+        app.mainloop()
 
 
 app.mainloop()
