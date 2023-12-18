@@ -5,7 +5,7 @@ import os
 import zipfile
 
 def zip_config_folder():
-    config_folder_path = "Config"  # Replace with the actual path to your "Config" folder
+    config_folder_path = "config"  # Replace with the actual path to your "config" folder
 
     try:
         # Prompt user for the destination path to save the zip file
@@ -15,13 +15,13 @@ def zip_config_folder():
             # Create a zip file named "config_archive.zip" in the selected destination
             zip_file_path = os.path.join(destination_path, "config_archive.zip")
 
-            with zipfile.ZipFile(zip_file_path, 'w') as zip_file:
-                # Add all files from the Config folder to the zip archive
-                for foldername, subfolders, filenames in os.walk(config_folder_path):
-                    for filename in filenames:
-                        file_path = os.path.join(foldername, filename)
+            with zipfile.ZipFile(zip_file_path, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+                # Add all files and subdirectories from the Config folder to the zip archive
+                for root, dirs, files in os.walk(config_folder_path):
+                    for file in files:
+                        file_path = os.path.join(root, file)
                         arcname = os.path.relpath(file_path, config_folder_path)
-                        zip_file.write(file_path, arcname=arcname)
+                        zip_file.write(file_path, arcname)
 
             # Display a success message
             messagebox.showinfo("Success", "Config folder zipped successfully!")

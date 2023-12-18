@@ -1,0 +1,49 @@
+{
+    "1001": {
+        "name": "usb",
+        "tag": [
+            "certing",
+            "SEBI"
+        ],
+        "execFile": "/home/vinayak1506/Desktop/sih/Compliant-Master/blockUsb.sh"
+    },
+    "1002": {
+        "name": "tor",
+        "tag": [
+            "certing",
+            "SEBI"
+        ],
+        "execFile": "blockTor.sh"
+    },
+    "1003": {
+        "name": "ssh",
+        "tag": [
+            "certing",
+            "SEBI"
+        ],
+        "execFile": "/home/vinayak1506/Desktop/sih/Compliant-Master/blockSsh.sh"
+    },
+    "1004": {
+        "name": "ufw",
+        "tag": [
+            "certing",
+            "SEBI"
+        ],
+        "execFile": "blockUfw.sh"
+    },
+    "1005": {
+        "name": "vinayak",
+        "tag": [
+            "certing",
+            "SEBI"
+        ],
+        "execFile": "blockVinayak.sh"
+    },
+    "1006": {
+        "name": "Aashu Yadav",
+        "tag": [
+            "SEBI"
+        ],
+        "execFile": "BlockAAshu.sh"
+    }
+}
