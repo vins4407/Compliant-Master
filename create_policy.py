@@ -3,6 +3,7 @@ import customtkinter as ctk
 from tkinter import Listbox, END, MULTIPLE, messagebox, ttk
 import json
 import subprocess
+from CTkMessagebox import CTkMessagebox
 
 # Create Main Loop:
 
@@ -53,14 +54,13 @@ def on_submit(data, selected_option_listbox):
     
     print("Selected Items:", selected_items)
     if not selected_items:
-        ctk.CTk.showinfo("No Selection", "Please select at least one item.")
+        CTkMessagebox(title="Warning Message!", message="Unable to connect!", icon="warning", option_1="Cancel", option_2="Retry")
         return
-
     show_confirmation_screen(selected_items)
 
 
 def show_confirmation_screen(selected_items):
-    popup = ctk.CTkFrame(master=app, corner_radius=20)
+    popup = ctk.CTk()
     popup.title("Confirmation")
 
     window_width = 300
@@ -85,6 +85,8 @@ def show_confirmation_screen(selected_items):
 
     cancel_button = ctk.CTkButton(popup, text="Cancel", command=popup.destroy )
     cancel_button.pack(pady=10)
+
+    popup.mainloop()
 
 
 
