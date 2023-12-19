@@ -52,7 +52,8 @@ class MyTabView(ctk.CTkTabview):
         #     label.bind("<ButtonRelease-1>", lambda event, tab_name=tab_name: self.on_tab_changed(event, tab_name))
 
         #     frame = ctk.CTkFrame(master=tab_frame)
-        #     frame.pack(fill="both", expand=True)
+        #     frame.pack(fill="bot
+        # h", expand=True)
 
         #     checkboxes_tab = []
 
@@ -286,27 +287,31 @@ welcome_label.grid(row=0, column=0, padx=20, pady=20, sticky="w")
 
 logout_button = ctk.CTkButton(main_frame, text="exit", command=exit ,font=("Arial", 20),
 )
-logout_button.grid(row=0, column=2, padx=20, pady=20, sticky="e")
+logout_button.grid(row=0, column=2, padx=150, pady=20, sticky="e")
 
 
 # options
 
+# New frame for Options_frame
+Options_frame_container = ctk.CTkFrame(app)
+Options_frame_container.grid(row=2, column=0, padx=120, pady=10, sticky="nsew")
+
+# Options_frame inside Options_frame_container
+Options_frame = ctk.CTkFrame(Options_frame_container, corner_radius=0)
+Options_frame.grid(row=0, column=0, pady
+                   =0)
+
 selected_option = tk.StringVar()
-options = ["ALL", "SEBI", "CertIN","Hippa"]
+options = ["Level1", "Level2", "Level3"]
 
-selected_option.set(options[0]) # Set default option (Optional)
-Options_frame = ctk.CTkFrame(main_frame, corner_radius=20)
+selected_option.set(options[0])  # Set default option (Optional)
+option1_button = ctk.CTkRadioButton(Options_frame, text=options[0], variable=selected_option, value=options[0])
+option2_button = ctk.CTkRadioButton(Options_frame, text=options[1], variable=selected_option, value=options[1])
+option3_button = ctk.CTkRadioButton(Options_frame, text=options[2], variable=selected_option, value=options[2])
 
-
-option1_button = ctk.CTkRadioButton(Options_frame, text=options[0] , variable=selected_option,  value=options[0])
-option2_button = ctk.CTkRadioButton(Options_frame, text=options[1]  , variable=selected_option, value=options[1])
-option3_button = ctk.CTkRadioButton(Options_frame, text=options[2]   ,variable=selected_option, value=options[2])
-
-
-Options_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
-option1_button.grid(row=1, column=0, pady=10)
-option2_button.grid(row=1, column=1, pady=10)
-option3_button.grid(row=1, column=2, pady=10)
+option1_button.grid(row=0, column=0, pady=0)
+option2_button.grid(row=0, column=1, pady=10)
+option3_button.grid(row=0, column=2, pady=10)
 
 option1_button.bind("<Button-1>", lambda event: get_selection(selected_option.get()))
 option2_button.bind("<Button-1>", lambda event: get_selection(selected_option.get()))
@@ -329,37 +334,30 @@ def get_selection(selected_option):
         for id, details in data.items():
             available_option_listbox.insert(tk.END, f"{details['name']}")
 
-# def get_selection(selected_option):
-#     available_option_listbox.delete(0, tk.END)
-#     print(selected_option)
-#     if selected_option == "SEBI":
-#         for details in [details for id, details in data.items() if "SEBI" in details["tag"]]:
-#             available_option_listbox.insert(tk.END, f"{details['name']}")
-#     elif selected_option == "CertIN":
-#         for details in [details for id, details in data.items() if "CertIN" in details["tag"]]:
-#             available_option_listbox.insert(tk.END, f"{details['name']}")
-#     else:
-#         for id, details in data.items():
-#             available_option_listbox.insert(tk.END, f"{details['name']}")
 
 
 
 
+# New frame for Selection_frame
+Selection_frame_container = ctk.CTkFrame(app)
+Selection_frame_container.grid(row=2, column=0, columnspan=3, padx= 0,pady=70)
 
-Selection_frame = ctk.CTkFrame(main_frame)
-Selection_frame.grid(row=1, column=0, columnspan=3, pady=60)
+
+Selection_frame = ctk.CTkFrame(Selection_frame_container)
+Selection_frame.grid(row=0, column=0, pady=0)
 
 left_frame = ctk.CTkFrame(Selection_frame)
-left_frame.grid(row=1, column=0, padx=10, pady=30, sticky="nsew")
+left_frame.grid(row=1, column=0, padx=0, pady=30, sticky="nsew")
 
 right_frame = ctk.CTkFrame(Selection_frame)
-right_frame.grid(row=1, column=1, padx=10, pady=30, sticky="nsew")
+right_frame.grid(row=1, column=1, padx=0, pady=30, sticky="nsew")
 
 label_available = ctk.CTkLabel(left_frame, text="Available Rules", font=("Helvetica", 20))
 label_available.pack(pady=5)
 
 label_selected = ctk.CTkLabel(right_frame, text="Selected Rules", font=("Helvetica", 20))
 label_selected.pack(pady=5)
+
 
 
 available_option_listbox = DragDropListbox(left_frame, None, "available_options", selectmode=MULTIPLE)
@@ -381,7 +379,7 @@ available_option_listbox.bind('<Double-Button-1>', lambda event: on_double_left_
 selected_option_listbox.bind('<Double-Button-1>', lambda event: on_double_left_click(event, selected_option_listbox, available_option_listbox))
 
 
-submit_button = ctk.CTkButton(main_frame, text="Submit", command=lambda: on_submit(data, selected_option_listbox),     font=("Arial", 20))
-submit_button.grid(row=2, column=1, pady=10)
+submit_button = ctk.CTkButton(Selection_frame, text="Submit", command=lambda: on_submit(data, selected_option_listbox),     font=("Arial", 20))
+submit_button.grid(row=5, column=1, pady=10)
 
 app.mainloop()
