@@ -10,3 +10,4 @@ echo ""
 echo "_______________ Bluetooth Hardenning Successfull !! _________________"
 
 }
+blockBlutooth
