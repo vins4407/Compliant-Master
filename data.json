@@ -1,24 +1,9 @@
-{
-    "1001": {
-        "name": "usb",
-        "tag": [
-            "SEBI"
-        ],
-        "execFile": "/home/vinayak1506/Desktop/sih/Compliant-Master/blockUsb.sh"
-    },
-    "1002": {
-        "name": "tor",
-        "tag": [
-            "SEBI"
-        ],
-        "execFile": "blockTor.sh"
-    },
-    "1003": {
+{    "1003": {
         "name": "ssh",
         "tag": [
             "SEBI"
         ],
-        "execFile": "/home/vinayak1506/Desktop/sih/Compliant-Master/blockSsh.sh"
+        "execFile": "config/B_scripts/blockSSH.sh"
     },
     "1004": {
         "name": "ufw",
@@ -28,11 +13,11 @@
         "execFile": "blockUfw.sh"
     },
     "1005": {
-        "name": "vinayak",
+        "name": "Block Bluetooth",
         "tag": [
             "Hippa"
         ],
-        "execFile": "blockVinayak.sh"
+        "execFile": "config/B_scripts/blockBluetooth.sh"
     },
     "1006": {
         "name": "Aashu Yadav",

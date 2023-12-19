@@ -234,6 +234,10 @@ def execute_script_and_display_result(exec_file):
     show_frame()
 
     try:
+        current_dir = os. getcwd()
+        print(current_dir)
+        scriptFile = current_dir + "/" + exec_file
+        print(scriptFile)
         process = subprocess.run(['bash', exec_file], text=True, stdout=subprocess.PIPE, check=True)
         output_text.insert(ctk.END, process.stdout)
     except subprocess.CalledProcessError as e:
