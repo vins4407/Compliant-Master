@@ -45,5 +45,76 @@
             "SEBI"
         ],
         "execFile": "BlockAAshu.sh"
+    },
+    "10008": {
+        "name": "testCase",
+        "tag": [
+            "sebi",
+            "certin",
+            "hippa"
+        ],
+        "execFile": "/home/ashutosh/Desktop/a.sh"
+    },
+    "100056": {
+        "name": "Ashutosh",
+        "tag": [
+            "sebi",
+            "hippa",
+            "test"
+        ],
+        "execFile": "/home/Desktop/test.sh"
+    },
+    "1234": {
+        "name": "Test User",
+        "tag": [
+            1,
+            1
+        ],
+        "execFile": "/home/ashutosh/test.sh"
+    },
+    "001": {
+        "name": "Block Bluetooth",
+        "tag": [
+            1,
+            1,
+            1
+        ],
+        "execFile": "/home/ashutosh/Desktop/CompliantMaster/Compliant-Master/config/B_scripts/blockBluetooth.sh"
+    },
+    "002": {
+        "name": "Block SSH",
+        "tag": [
+            1,
+            1,
+            1
+        ],
+        "execFile": "/home/ashutosh/Desktop/CompliantMaster/Compliant-Master/config/B_scripts/blockSSH.sh"
+    },
+    "003": {
+        "name": "Block USB",
+        "tag": [
+            1,
+            1,
+            1
+        ],
+        "execFile": "/home/ashutosh/Desktop/CompliantMaster/Compliant-Master/config/B_scripts/blockUsb.sh"
+    },
+    "005": {
+        "name": "Latest Update",
+        "tag": [
+            1,
+            1,
+            1
+        ],
+        "execFile": "/home/ashutosh/Desktop/CompliantMaster/Compliant-Master/config/otherScript/latestUpdate.sh"
+    },
+    "004": {
+        "name": "Auto Update",
+        "tag": [
+            1,
+            1,
+            1
+        ],
+        "execFile": "/home/ashutosh/Desktop/CompliantMaster/Compliant-Master/config/otherScript/autoUpdate.sh"
     }
 }
