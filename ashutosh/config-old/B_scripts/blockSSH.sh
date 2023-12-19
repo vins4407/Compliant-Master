@@ -1,5 +1,4 @@
-#!/bin/bash
-
+   
 block_ssh_for_user() {
     local username="$1"
     local sshd_config="/etc/ssh/sshd_config"

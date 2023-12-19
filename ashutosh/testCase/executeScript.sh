@@ -1,5 +1,4 @@
-#!/bin/bash
-
+   
 if [ $# -eq 0 ]; then
     echo "Usage: $0 <script_to_execute.sh>"
     exit 1

@@ -1,5 +1,4 @@
-#!/bin/bash
-
+   
 get_allowed_users() {
     sshd_config="/etc/ssh/sshd_config"
     result=$(sudo grep '^AllowUsers' "$sshd_config")

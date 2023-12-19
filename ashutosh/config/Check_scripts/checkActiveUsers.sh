@@ -1,5 +1,4 @@
-#!/bin/bash
-
+   
 get_active_users() {
     # Run the 'who' command to get a list of currently logged-in users
     result=$(who 2>&1)
