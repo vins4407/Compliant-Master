@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+blockFailAttemptonSSH(){
+
 # Install Fail2ban
 sudo apt install fail2ban
 
@@ -21,3 +24,6 @@ sudo systemctl restart fail2ban
 sudo systemctl status fail2ban
 
 echo "Fail2ban installed and configured for SSH. Check the status for confirmation."
+}
+
+blockFailAttemptonSSH

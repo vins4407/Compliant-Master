@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+
 get_allowed_users() {
   local sshd_config="/etc/ssh/sshd_config"
   local result=$(sudo grep '^AllowUsers' "$sshd_config") || return 1
@@ -21,7 +23,7 @@ block_ssh_for_user() {
   echo "SSH access blocked for user '$username'"
 }
 
-main() {
+blockSSH() {
   while read -r user; do
     block_ssh_for_user "$user"
   done < <(get_allowed_users)
@@ -29,4 +31,4 @@ main() {
   echo "SSH is not allowed for any users."
 }
 
-main
+blockSSH
