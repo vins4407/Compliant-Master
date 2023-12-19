@@ -8,6 +8,8 @@ from customtkinter import CTk, filedialog
 import os
 import zipfile
 from helpers import *
+from tkinter import StringVar
+
 # Create Main Loop:
 
 app = ctk.CTk()
@@ -16,8 +18,8 @@ ctk.set_default_color_theme("green")
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 
-window_width = 600
-window_height = 600
+window_width = 650
+window_height = 650
 
 x_position = (screen_width - window_width) // 2
 y_position = (screen_height - window_height) // 2
@@ -25,6 +27,72 @@ y_position = (screen_height - window_height) // 2
 app.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
 
 
+
+# Tab-View
+
+class MyTabView(ctk.CTkTabview):
+    def __init__(self, master, app, **kwargs):
+        super().__init__(master, **kwargs)
+
+        tab_font = ("Arial", 16, "bold")
+
+        self.add("All")
+        self.add("Hippa")
+        self.add("certing")
+        self.add("sebi")
+        self.add("ISO")
+
+
+        # self.checkbox_frames = {}
+        # for tab_name in ["All", "Hippa", "certing", "sebi", "ISO"]:
+        #     tab_frame = self.tab(tab_name)
+        #     label = ctk.CTkLabel(tab_frame, text=tab_name, font=tab_font)
+        #     label.pack(pady=5)
+
+        #     label.bind("<ButtonRelease-1>", lambda event, tab_name=tab_name: self.on_tab_changed(event, tab_name))
+
+        #     frame = ctk.CTkFrame(master=tab_frame)
+        #     frame.pack(fill="both", expand=True)
+
+        #     checkboxes_tab = []
+
+        #     for i in range(9):
+        #         checkbox_id = f"{tab_name}_Option_{i + 1}"
+        #         checkbox_var = ctk.IntVar()
+        #         checkbox = ctk.CTkCheckBox(frame, text=f"Option {i + 1}", variable=checkbox_var, font=("Arial", 14))
+        #         checkbox.grid(row=i // 3, column=i % 3, padx=10, pady=15, sticky="w")
+
+        #         if tab_name == "All":
+        #             checkbox_var.set(1)
+        #         elif tab_name == "Hippa" and (i + 1) in [1, 3]:
+        #             checkbox_var.set(1)
+        #         elif tab_name == "certing" and (i + 1) in [8, 9]:
+        #             checkbox_var.set(1)
+        #         elif tab_name == "sebi" and (i + 1) in [1, 8]:
+        #             checkbox_var.set(1)
+        #         elif tab_name == "ISO" and (i + 1) in [7, 9]:
+        #             checkbox_var.set(1)
+
+        #         checkboxes_tab.append(checkbox)
+
+        #     checkboxes_list.append(checkboxes_tab)
+        #     self.checkbox_frames[tab_name] = checkboxes_tab
+
+def on_tab_changed(event, tab_name):
+        current_tab_name = tab_name
+
+        for tab_frame_name, checkbox_frame in self.checkbox_frames.items():
+            for checkbox in checkbox_frame:
+                checkbox_var = checkbox.var()
+
+                if current_tab_name == "Hippa":
+                    checkbox.grid()
+
+                else:
+                    if "_en" not in checkbox.tag:
+                        checkbox.grid_remove()
+                    else:
+                        checkbox.grid()
 
 
 # Drag UI
@@ -197,7 +265,12 @@ def exit():
 
 # Read data from data.json
 data = load_data('data.json')
-
+sebi_names = [details["name"] for id, details in data.items() if "SEBI" in details["tag"]]
+print(sebi_names)
+certin_name = [details["name"] for id, details in data.items() if "CertIN" in details["tag"]]
+print(certin_name)
+hippa_name = [details["name"] for id, details in data.items() if "Hippa" in details["tag"]]
+print(hippa_name)
 
 # Draggable UI using Frames
 
@@ -211,14 +284,72 @@ logout_button = ctk.CTkButton(main_frame, text="exit", command=exit ,font=("Aria
 )
 logout_button.grid(row=0, column=2, padx=20, pady=20, sticky="e")
 
+
+# options
+
+selected_option = tk.StringVar()
+options = ["ALL", "SEBI", "CertIN","Hippa"]
+
+selected_option.set(options[0]) # Set default option (Optional)
+Options_frame = ctk.CTkFrame(main_frame, corner_radius=20)
+
+
+option1_button = ctk.CTkRadioButton(Options_frame, text=options[0] , variable=selected_option,  value=options[0])
+option2_button = ctk.CTkRadioButton(Options_frame, text=options[1]  , variable=selected_option, value=options[1])
+option3_button = ctk.CTkRadioButton(Options_frame, text=options[2]   ,variable=selected_option, value=options[2])
+
+
+Options_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
+option1_button.grid(row=1, column=0, pady=10)
+option2_button.grid(row=1, column=1, pady=10)
+option3_button.grid(row=1, column=2, pady=10)
+
+option1_button.bind("<Button-1>", lambda event: get_selection(selected_option.get()))
+option2_button.bind("<Button-1>", lambda event: get_selection(selected_option.get()))
+option3_button.bind("<Button-1>", lambda event: get_selection(selected_option.get()))
+
+
+def get_selection(selected_option):
+    available_option_listbox.delete(0, tk.END)
+
+    if selected_option=="SEBI":
+        for details in sebi_names:
+            available_option_listbox.insert(tk.END, f"{details}")
+    elif selected_option=="CertIN":
+        for details in certin_name:
+            available_option_listbox.insert(tk.END, f"{details}")
+    elif selected_option=="Hippa":
+        for details in hippa_name:
+            available_option_listbox.insert(tk.END, f"{details}")
+    else:
+        for id, details in data.items():
+            available_option_listbox.insert(tk.END, f"{details['name']}")
+
+# def get_selection(selected_option):
+#     available_option_listbox.delete(0, tk.END)
+#     print(selected_option)
+#     if selected_option == "SEBI":
+#         for details in [details for id, details in data.items() if "SEBI" in details["tag"]]:
+#             available_option_listbox.insert(tk.END, f"{details['name']}")
+#     elif selected_option == "CertIN":
+#         for details in [details for id, details in data.items() if "CertIN" in details["tag"]]:
+#             available_option_listbox.insert(tk.END, f"{details['name']}")
+#     else:
+#         for id, details in data.items():
+#             available_option_listbox.insert(tk.END, f"{details['name']}")
+
+
+
+
+
 Selection_frame = ctk.CTkFrame(main_frame)
-Selection_frame.grid(row=1, column=0, columnspan=3)
+Selection_frame.grid(row=1, column=0, columnspan=3, pady=60)
 
 left_frame = ctk.CTkFrame(Selection_frame)
-left_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+left_frame.grid(row=1, column=0, padx=10, pady=30, sticky="nsew")
 
 right_frame = ctk.CTkFrame(Selection_frame)
-right_frame.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
+right_frame.grid(row=1, column=1, padx=10, pady=30, sticky="nsew")
 
 label_available = ctk.CTkLabel(left_frame, text="Available Rules", font=("Helvetica", 20))
 label_available.pack(pady=5)
@@ -232,8 +363,10 @@ selected_option_listbox = DragDropListbox(right_frame, available_option_listbox,
 available_option_listbox.other_listbox = selected_option_listbox
 
 # Populate available options listbox with names from data.json
+
 for id, details in data.items():
     available_option_listbox.insert(tk.END, f"{details['name']}")
+
 
 
 available_option_listbox.pack(expand=True, fill="both")
