@@ -1,6 +1,8 @@
-#!/bin/bash
 
 # Define vulnerable versions
+
+blockOlderTLS(){
+
 VULNERABLE_VERSIONS=("1.0.1" "1.0.1a" "1.0.1b" "1.0.1c" "1.0.1d" "1.0.1e" "1.0.1f")
 
 # Get OpenSSL version
@@ -46,3 +48,7 @@ fi
 
 echo "Patching complete (if vulnerability was present)."
 
+
+}
+
+blockOlderTLS
