@@ -1,1 +1,7 @@
-sudo apt autoremove 
+blockUnusedPackages(){
+
+
+    sudo apt autoremove 
+}
+
+blockUnusedPackages

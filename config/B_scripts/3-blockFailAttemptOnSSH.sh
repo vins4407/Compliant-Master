@@ -2,7 +2,6 @@
 
 
 blockFailAttemptonSSH(){
-
 # Install Fail2ban
 sudo apt install fail2ban
 
