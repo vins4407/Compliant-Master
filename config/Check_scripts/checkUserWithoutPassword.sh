@@ -1,0 +1,1 @@
+sudo cat /etc/shadow | awk -F: '($2==""){print $1}'
