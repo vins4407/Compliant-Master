@@ -381,5 +381,3 @@ submit_button = ctk.CTkButton(main_frame, text="Submit", command=lambda: on_subm
 submit_button.grid(row=2, column=1, pady=10)
 
 app.mainloop()
-
-

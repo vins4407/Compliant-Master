@@ -2,7 +2,6 @@
     "1001": {
         "name": "usb",
         "tag": [
-            
             "SEBI"
         ],
         "execFile": "/home/vinayak1506/Desktop/sih/Compliant-Master/blockUsb.sh"
@@ -10,7 +9,6 @@
     "1002": {
         "name": "tor",
         "tag": [
-            
             "SEBI"
         ],
         "execFile": "blockTor.sh"
@@ -18,7 +16,6 @@
     "1003": {
         "name": "ssh",
         "tag": [
-          
             "SEBI"
         ],
         "execFile": "/home/vinayak1506/Desktop/sih/Compliant-Master/blockSsh.sh"
@@ -27,7 +24,6 @@
         "name": "ufw",
         "tag": [
             "CertIN"
-            
         ],
         "execFile": "blockUfw.sh"
     },
