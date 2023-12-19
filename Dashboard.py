@@ -11,8 +11,8 @@ app.title("Welcome Root")
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 
-window_width = 600
-window_height = 600
+window_width = 650
+window_height = 650
 
 
 x_position = (screen_width - window_width) // 2
