@@ -1,100 +1,78 @@
-{    "1003": {
-        "name": "ssh",
-        "tag": [
-            "SEBI"
-        ],
-        "execFile": "config/B_scripts/blockSSH.sh"
-    },
-    "1004": {
-        "name": "ufw",
-        "tag": [
-            "CertIN"
-        ],
-        "execFile": "blockUfw.sh"
-    },
-    "1005": {
-        "name": "Block Bluetooth",
-        "tag": [
-            "Hippa"
-        ],
-        "execFile": "config/B_scripts/blockBluetooth.sh"
-    },
-    "1006": {
-        "name": "Aashu Yadav",
-        "tag": [
-            "SEBI"
-        ],
-        "execFile": "BlockAAshu.sh"
-    },
-    "10008": {
-        "name": "testCase",
-        "tag": [
-            "sebi",
-            "certin",
-            "hippa"
-        ],
-        "execFile": "/home/ashutosh/Desktop/a.sh"
-    },
-    "100056": {
-        "name": "Ashutosh",
-        "tag": [
-            "sebi",
-            "hippa",
-            "test"
-        ],
-        "execFile": "/home/Desktop/test.sh"
-    },
-    "1234": {
-        "name": "Test User",
-        "tag": [
-            1,
-            1
-        ],
-        "execFile": "/home/ashutosh/test.sh"
-    },
-    "001": {
-        "name": "Block Bluetooth",
-        "tag": [
-            1,
-            1,
-            1
-        ],
-        "execFile": "/home/ashutosh/Desktop/CompliantMaster/Compliant-Master/config/B_scripts/blockBluetooth.sh"
-    },
-    "002": {
-        "name": "Block SSH",
-        "tag": [
-            1,
-            1,
-            1
-        ],
-        "execFile": "/home/ashutosh/Desktop/CompliantMaster/Compliant-Master/config/B_scripts/blockSSH.sh"
-    },
-    "003": {
-        "name": "Block USB",
-        "tag": [
-            1,
-            1,
-            1
-        ],
-        "execFile": "/home/ashutosh/Desktop/CompliantMaster/Compliant-Master/config/B_scripts/blockUsb.sh"
-    },
-    "005": {
-        "name": "Latest Update",
-        "tag": [
-            1,
-            1,
-            1
-        ],
-        "execFile": "/home/ashutosh/Desktop/CompliantMaster/Compliant-Master/config/otherScript/latestUpdate.sh"
-    },
-    "004": {
-        "name": "Auto Update",
-        "tag": [
-            1,
-            1,
-            1
-        ],
-        "execFile": "/home/ashutosh/Desktop/CompliantMaster/Compliant-Master/config/otherScript/autoUpdate.sh"
-    }
+{"1001": {
+    "name": "Block Bluetooth",
+    "tag": [
+        "1"
+    ],
+    "execFile": "config/B_scripts/1-blockBluetooth.sh"
+},
+"1002": {
+    "name": "Delete FTP,Telnet,RSH",
+    "tag": [
+        "1"
+    ],
+    "execFile": "config/B_scripts/4-blockFtpTelnetOtherservices.sh"
+},
+"1003": {
+    "name": "Removeunusedpackages",
+    "tag": [
+        "1"
+    ],
+    "execFile": "config/B_scripts/7-delUnusedPackages.sh"
+},
+"1004": {
+    "name": "RestrictBruteforeceonTCP",
+    "tag": [
+        "2"
+    ],
+    "execFile": "config/B_scripts/3-blockFailAttemptOnSSH.sh"
+},
+
+"1005": {
+    "name": "Block older TLS",
+    "tag": [
+        "1",
+        "hippa",
+        "test"
+    ],
+    "execFile": "config/B_scripts/5-blockOlderTLS.sh"
+},
+
+"1006": {
+    "name": "Block TOR",
+    "tag": [
+        "3",
+        "2"
+    ],
+    "execFile": "config/B_scripts/10-blockTOR.sh"
+},
+
+"1007": {
+    "name": "Restrict SSH",
+    "tag": [
+        "1"
+    ],
+    "execFile": "/config/B_scripts/6-blockSSH.sh"
+},
+"1008": {
+    "name": "Latest Update",
+    "tag": [
+        "1"
+    ],
+    "execFile": "/config/otherScript/latestUpdate.sh"
+},
+"1009": {
+    "name": "Auto Update",
+    "tag": [
+        "1"
+    ],
+    "execFile": "/config/otherScript/autoUpdate.sh"
+},
+
+"1010": {
+    "name": "DisableLoginWithRoot",
+    "tag": [
+        "1"
+    ],
+    "execFile": "/config/otherScript/8-disableLoginWithRoot.sh"
+}
 }
