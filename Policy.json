@@ -1,0 +1,73 @@
+{
+  "1": {
+    "name": "Block Bluetooth",
+    "tag": [
+      "1",
+      "CISF"
+    ]
+  },
+  "2": {
+    "name": "Delete FTP,Telnet,RSH",
+    "tag": [
+      "1"
+    ]
+  },
+  "3": {
+    "name": "Removeunusedpackages",
+    "tag": [
+      "1",
+      "CISF"
+    ]
+  },
+  "4": {
+    "name": "RestrictBruteforeceonTCP",
+    "tag": [
+      "2",
+      "CISF",
+      "Hippa"
+    ]
+  },
+  "5": {
+    "name": "Block older TLS",
+    "tag": [
+      "1",
+      "Hippa"
+    ]
+  },
+  "6": {
+    "name": "Block TOR",
+    "tag": [
+      "3",
+      "2",
+      "Hippa"
+    ]
+  },
+  "7": {
+    "name": "Restrict SSH",
+    "tag": [
+      "1",
+      "Hippa"
+    ]
+  },
+  "8": {
+    "name": "Latest Update",
+    "tag": [
+      "1",
+      "CISF"
+    ]
+  },
+  "9": {
+    "name": "Auto Update",
+    "tag": [
+      "1",
+      "Hippa"
+    ]
+  },
+  "10": {
+    "name": "DisableLoginWithRoot",
+    "tag": [
+      "1",
+      "CISF"
+    ]
+  }
+}

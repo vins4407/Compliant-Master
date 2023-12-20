@@ -1,4 +1,4 @@
-{"1001": {
+{"1": {
     "name": "Block Bluetooth",
     "tag": [
         "1",
@@ -35,12 +35,12 @@
     "execFile": "config/B_scripts/3-blockFailAttemptOnSSH.sh"
 },
 
-"1005": {
+"5": {
     "name": "Block older TLS",
     "tag": [
         "1",
-        "hippa",
-        "test"
+        "Hippa"
+        
     ],
     "execFile": "config/B_scripts/5-blockOlderTLS.sh"
 },
@@ -55,7 +55,7 @@
     "execFile": "config/B_scripts/10-blockTOR.sh"
 },
 
-"1007": {
+"7": {
     "name": "Restrict SSH",
     "tag": [
         "2",
@@ -64,7 +64,7 @@
     ],
     "execFile": "config/B_scripts/6-blockSSH.sh"
 },
-"1008": {
+"8": {
     "name": "Latest Update",
     "tag": [
         "1",
@@ -73,7 +73,7 @@
     ],
     "execFile": "config/otherScript/latestUpdate.sh"
 },
-"1009": {
+"9": {
     "name": "Auto Update",
     "tag": [
         "2",
@@ -83,7 +83,7 @@
     "execFile": "config/otherScript/autoUpdate.sh"
 },
 
-"1010": {
+"10": {
     "name": "DisableLoginWithRoot",
     "tag": [
         "1",

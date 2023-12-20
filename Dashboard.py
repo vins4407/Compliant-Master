@@ -12,8 +12,8 @@ app.title("Welcome Root")
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 
-window_width = 650
-window_height = 650
+window_width = 800
+window_height = 800
 
 
 x_position = (screen_width - window_width) // 2
@@ -69,7 +69,7 @@ def show_screen_policy():
 
 def create_policy():
     app.destroy()
-    subprocess.run(["python3", "create_policy.py"])
+    subprocess.run(["python3", "Createpolicy.py"])
     app.destroy()
 
 # Frame-Main
@@ -100,7 +100,7 @@ buttons_info = [
 
 for i, button_info in enumerate(buttons_info):
     button = ctk.CTkButton(main_frame, text=button_info["name"], width=120, height=120, command=lambda resp=button_info["responsibility"]: button_click(resp))
-    button.grid(row=i // 3 + 1, column=i % 3, padx=20, pady=20)
+    button.grid(row=i // 3 + 1, column=i % 3, padx=60, pady=80)
 
 additional_button = ctk.CTkButton(main_frame, text="System Info", command=lambda: button_click("Additional Responsibility"), width=445, height=110)
 additional_button.grid(row=len(buttons_info) // 3 + 2, column=0, padx=20, pady=20, columnspan=3)

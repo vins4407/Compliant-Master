@@ -9,7 +9,8 @@ import os
 import zipfile
 from helpers import *
 from tkinter import StringVar
-
+from ScriptGenerateTK  import *
+from generatePolicy import *
 # Create Main Loop:
 
 app = ctk.CTk()
@@ -18,8 +19,8 @@ ctk.set_default_color_theme("green")
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 
-window_width = 650
-window_height = 650
+window_width = 800
+window_height = 800
 
 x_position = (screen_width - window_width) // 2
 y_position = (screen_height - window_height) // 2
@@ -29,55 +30,6 @@ app.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
 
 
 # Tab-View
-
-class MyTabView(ctk.CTkTabview):
-    def __init__(self, master, app, **kwargs):
-        super().__init__(master, **kwargs)
-
-        tab_font = ("Arial", 16, "bold")
-
-        self.add("All")
-        self.add("Hippa")
-        self.add("certing")
-        self.add("sebi")
-        self.add("ISO")
-
-
-        # self.checkbox_frames = {}
-        # for tab_name in ["All", "Hippa", "certing", "sebi", "ISO"]:
-        #     tab_frame = self.tab(tab_name)
-        #     label = ctk.CTkLabel(tab_frame, text=tab_name, font=tab_font)
-        #     label.pack(pady=5)
-
-        #     label.bind("<ButtonRelease-1>", lambda event, tab_name=tab_name: self.on_tab_changed(event, tab_name))
-
-        #     frame = ctk.CTkFrame(master=tab_frame)
-        #     frame.pack(fill="bot
-        # h", expand=True)
-
-        #     checkboxes_tab = []
-
-        #     for i in range(9):
-        #         checkbox_id = f"{tab_name}_Option_{i + 1}"
-        #         checkbox_var = ctk.IntVar()
-        #         checkbox = ctk.CTkCheckBox(frame, text=f"Option {i + 1}", variable=checkbox_var, font=("Arial", 14))
-        #         checkbox.grid(row=i // 3, column=i % 3, padx=10, pady=15, sticky="w")
-
-        #         if tab_name == "All":
-        #             checkbox_var.set(1)
-        #         elif tab_name == "Hippa" and (i + 1) in [1, 3]:
-        #             checkbox_var.set(1)
-        #         elif tab_name == "certing" and (i + 1) in [8, 9]:
-        #             checkbox_var.set(1)
-        #         elif tab_name == "sebi" and (i + 1) in [1, 8]:
-        #             checkbox_var.set(1)
-        #         elif tab_name == "ISO" and (i + 1) in [7, 9]:
-        #             checkbox_var.set(1)
-
-        #         checkboxes_tab.append(checkbox)
-
-        #     checkboxes_list.append(checkboxes_tab)
-        #     self.checkbox_frames[tab_name] = checkboxes_tab
 
 def on_tab_changed(event, tab_name):
         current_tab_name = tab_name
@@ -114,34 +66,31 @@ class DragDropListbox(Listbox):
 
 # # Download zip/json/yaml file  
 
-# def download_yaml(selected_items):
-#     for selected_item in selected_items:
-#         print(f"Downloading YAML for {selected_item}")
-#         config_folder_path = "config"  # Replace with the actual path to your "config" folder
 
-#     try:
-#         # Prompt user for the destination path to save the zip file
-#         destination_path = filedialog.askdirectory(title="Select Destination Folder")
 
-#         if destination_path:
-#             # Create a zip file named "config_archive.zip" in the selected destination
-#             zip_file_path = os.path.join(destination_path, "config_archive.zip")
+def download_Json(selected_items):
+    for selected_item in selected_items:
+        print(f"Downloading YAML for {selected_item}")
 
-#             with zipfile.ZipFile(zip_file_path, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-#                 # Add all files and subdirectories from the Config folder to the zip archive
-#                 for root, dirs, files in os.walk(config_folder_path):
-#                     for file in files:
-#                         file_path = os.path.join(root, file)
-#                         arcname = os.path.relpath(file_path, config_folder_path)
-#                         zip_file.write(file_path, arcname)
+    try:
+        # Prompt user for the destination path to save the zip file
+        # destination_path = filedialog.askdirectory(title="Select Destination Folder")
+        destination_path = os.getcwd()
 
-#             # Display a success message
-#             CTkMessagebox(message="Success! Config folder zipped successfully.",
-#                   icon="check", option_1="Done")
+        if destination_path:
+                with open("selectedFileName.txt", "w") as file:
+                # Write each selected item on a separate line
+                    for item in selected_items:
+                        file.write(f"{item}\n")
 
-#     except Exception as e:
-#         # Display an error message if something goes wrong
-#         CTkMessagebox(title="Error", message=f"Something went wrong!!! \\n An error occurred: {str(e)}", icon="cancel")
+
+            # Display a success message
+                CTkMessagebox(message="Success! file downloaded successfully.",
+                  icon="check", option_1="Done")
+
+    except Exception as e:
+        # Display an error message if something goes wrong
+        CTkMessagebox(title="Error", message=f"Something went wrong!!! \\n An error occurred: {str(e)}", icon="cancel")
 
 
 
@@ -164,11 +113,20 @@ def load_data(file_path):
 
 def on_submit(data, selected_option_listbox):
     selected_items = selected_option_listbox.get(0, tk.END)
+    generateJson(selected_items,"data.json","Policy.json")
     
     print("Selected Items:", selected_items)
     if not selected_items:
         CTkMessagebox(title="Warning Message!", message="Unable to connect!", icon="warning", option_1="Cancel", option_2="Retry")
         return
+    destination_path = os.getcwd()
+
+    if destination_path:
+                with open("selectedFileName.txt", "w") as file:
+                # Write each selected item on a separate line
+                    for item in selected_items:
+                        file.write(f"{item}\n")
+
     show_confirmation_screen(selected_items)
 
 
@@ -187,10 +145,10 @@ def show_confirmation_screen(selected_items):
 
     popup.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
 
-    # def download_yaml_wrapper():
-    #     popup.destroy()
-    #     download_yaml(selected_items)
-    #     popup.destroy()
+    def download_Json_wrapper():
+        popup.destroy()
+        generateJson(selected_items,"data.json","Policy.json")
+        popup.destroy()
 
     def harden_now_wrapper():
         popup.destroy()
@@ -201,18 +159,22 @@ def show_confirmation_screen(selected_items):
     label = ctk.CTkLabel(popup, text=f"Confirm action for {', '.join(selected_items)}", font=("Arial", 14))
     label.pack(pady=10)
 
-    download_button = ctk.CTkButton(popup, text="Download Policy", command=zip_config_folder )
+    download_button = ctk.CTkButton(popup, text="Download Policy", command=download_Json_wrapper )
     download_button.pack( padx=10)
+    
+    download_button = ctk.CTkButton(popup, text="Generate Script", command=generateScript )
+    download_button.pack( padx=10)
+
 
     hardening_button = ctk.CTkButton(popup, text="Start Hardening", command=harden_now_wrapper)
     hardening_button.pack( padx=10,pady=10)
 
     cancel_button = ctk.CTkButton(popup, text="Cancel",  command=popup.destroy )
-
     cancel_button.pack(pady=10)
 
     popup.mainloop()
 
+    
 def harden_now(selected_items):
     for selected_item in selected_items:
         print(f"Hardening NOW for {selected_item}")
@@ -280,11 +242,11 @@ def exit():
 
 # Read data from data.json
 data = load_data('data.json')
-sebi_names = [details["name"] for id, details in data.items() if "SEBI" in details["tag"]]
+sebi_names = [details["name"] for id, details in data.items() if "1" in details["tag"]]
 print(sebi_names)
-certin_name = [details["name"] for id, details in data.items() if "CertIN" in details["tag"]]
+certin_name = [details["name"] for id, details in data.items() if "2" in details["tag"]]
 print(certin_name)
-hippa_name = [details["name"] for id, details in data.items() if "Hippa" in details["tag"]]
+hippa_name = [details["name"] for id, details in data.items() if "3" in details["tag"]]
 print(hippa_name)
 
 # Draggable UI using Frames
@@ -312,7 +274,7 @@ Options_frame.grid(row=0, column=0, pady
                    =0)
 
 selected_option = tk.StringVar()
-options = ["Level1", "Level2", "Level3"]
+options = ["1", "2", "3"]
 
 selected_option.set(options[0])  # Set default option (Optional)
 option1_button = ctk.CTkRadioButton(Options_frame, text=options[0], variable=selected_option, value=options[0])
@@ -331,13 +293,13 @@ option3_button.bind("<Button-1>", lambda event: get_selection(selected_option.ge
 def get_selection(selected_option):
     available_option_listbox.delete(0, tk.END)
 
-    if selected_option=="SEBI":
+    if selected_option=="1":
         for details in sebi_names:
             available_option_listbox.insert(tk.END, f"{details}")
-    elif selected_option=="CertIN":
+    elif selected_option=="2":
         for details in certin_name:
             available_option_listbox.insert(tk.END, f"{details}")
-    elif selected_option=="Hippa":
+    elif selected_option=="3":
         for details in hippa_name:
             available_option_listbox.insert(tk.END, f"{details}")
     else:
@@ -376,11 +338,12 @@ available_option_listbox.other_listbox = selected_option_listbox
 
 # Populate available options listbox with names from data.json
 
+print(selected_option_listbox)
+
 for id, details in data.items():
     available_option_listbox.insert(tk.END, f"{details['name']}")
 
-
-
+    
 available_option_listbox.pack(expand=True, fill="both")
 selected_option_listbox.pack(expand=True, fill="both")
 
@@ -390,6 +353,6 @@ selected_option_listbox.bind('<Double-Button-1>', lambda event: on_double_left_c
 
 
 submit_button = ctk.CTkButton(Selection_frame, text="Submit", command=lambda: on_submit(data, selected_option_listbox),     font=("Arial", 20))
-submit_button.grid(row=5, column=1, pady=10)
+submit_button.grid(row=5, column=1, pady=10 )
 
 app.mainloop()
