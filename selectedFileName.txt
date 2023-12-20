@@ -1,0 +1,72 @@
+Block Bluetooth
+Delete FTP,Telnet, RSH
+Remove Unwanted Packages
+Restrict FailAttemp on SSH
+Block older TLS
+Block TOR Traffic
+Restrict SSH
+Latest Update
+Auto Update
+DisableLoginWithRoot
+Disbale Network
+Block IMAP
+Block POP3
+Block IPV6
+Block ICMP
+Block TCP Sync
+Enable Auditd
+Enable UFW
+Enable Auditd
+Block SAMBA
+Block SNMP
+Block Web Access
+Secure IP Tables 
+Secure IP Tables - 2
+Block Bluetooth
+Delete FTP,Telnet, RSH
+Remove Unwanted Packages
+Restrict FailAttemp on SSH
+Block older TLS
+Block TOR Traffic
+Restrict SSH
+Latest Update
+Auto Update
+DisableLoginWithRoot
+Disbale Network
+Block IMAP
+Block POP3
+Block IPV6
+Block ICMP
+Block TCP Sync
+Enable Auditd
+Enable UFW
+Enable Auditd
+Block SAMBA
+Block SNMP
+Block Web Access
+Secure IP Tables 
+Secure IP Tables - 2
+Block Bluetooth
+Delete FTP,Telnet, RSH
+Remove Unwanted Packages
+Restrict FailAttemp on SSH
+Block older TLS
+Block TOR Traffic
+Restrict SSH
+Latest Update
+Auto Update
+DisableLoginWithRoot
+Disbale Network
+Block IMAP
+Block POP3
+Block IPV6
+Block ICMP
+Block TCP Sync
+Enable Auditd
+Enable UFW
+Enable Auditd
+Block SAMBA
+Block SNMP
+Block Web Access
+Secure IP Tables 
+Secure IP Tables - 2

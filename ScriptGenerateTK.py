@@ -3,7 +3,7 @@ from tkinter import filedialog, ttk
 import json
 import os
 
-def on_click():
+def generateScript():
     with open('selectedFileName.txt', 'r') as file:
         selected_names = file.readlines()
 
@@ -27,17 +27,10 @@ def on_click():
         with open('My-Script.sh', 'r') as file_to_write:
             file.write(file_to_write.read())
         file.close()
+        CTkMessagebox(message="Success! file downloaded successfully.",
+                  icon="check", option_1="Done")
+
 
     save_file()
     os.remove('My-Script.sh')
 
-app = tk.Tk()
-app.geometry('200x100')
-
-frame = ttk.Frame(app, padding='10')
-frame.pack()
-
-button = ttk.Button(frame, text='Create Script', command=on_click)
-button.pack(pady=20)
-
-app.mainloop()
