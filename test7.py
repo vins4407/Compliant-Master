@@ -31,7 +31,6 @@ def load_data(file_path):
 
 
 def on_submit(data, selected_option_list):
-    
 
     destination_path = os.getcwd()
 
