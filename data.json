@@ -91,7 +91,7 @@
         "HIPPA"
    ],
     "isSpecialCase" : "no",
-    "execFile": "config/otherScript/8-disableLoginWithRoot.sh"
+    "execFile": "config/B_scripts/8-disableLoginWithRoot.sh"
 },
 
 "1011": {
