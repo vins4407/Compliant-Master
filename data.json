@@ -211,12 +211,12 @@
 },
 
 "1023": {
-    "name": "Secure IP Tables ",
+    "name": "Secure IP Tables",
     "tag": [
         "CIS_Level-1",
         "HIPPA"
    ],
-    "isSpecialCase" : "no",
+    "isSpecialCase" : "yes",
     "execFile": "config/B_scripts/hardenIpTables1.sh"
 },
 

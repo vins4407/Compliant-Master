@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import json
+import os
+
 
 class CustomBox(tk.Canvas):
     def __init__(self, master, index, name, exec_file, is_special_case, callback):
@@ -17,6 +19,7 @@ class CustomBox(tk.Canvas):
         self.info_button = tk.Button(self, text="i", command=self.show_info, font=("Arial", 8, "bold"))
         if self.is_special_case == 'yes':
             self.info_button.place(relx=1, rely=0, anchor="ne")
+            
 
         self.bind("<Button-1>", self.toggle_color)
         self.callback = callback
@@ -37,8 +40,67 @@ class CustomBox(tk.Canvas):
             messagebox.showinfo("Box Information", f"This is a special case: {self.name}")
             self.info_button.place(relx=1, rely=0, anchor="ne")
 
-        else:
-            messagebox.showinfo("Box Information", f"No special information for: {self.name}")
+            info_window = tk.Toplevel(self)
+            info_window.title("Box Information")
+
+            if self.name == "Secure IP Tables":
+                description_label = tk.Label(info_window, text="This will only allow incoming traffic on the specified ports.")
+                description_label.pack(pady=5)
+
+                # Input field for comma-separated choices of ports
+                port_entry_label = tk.Label(info_window, text="Enter ports (comma-separated):")
+                port_entry_label.pack(pady=5)
+
+                port_var = tk.StringVar()
+                port_entry = tk.Entry(info_window, textvariable=port_var)
+                port_entry.pack(pady=5)
+
+                submit_button = tk.Button(info_window, text="Submit", command=lambda: self.update_iptable_script(port_var.get(), info_window))
+                submit_button.pack(pady=5)
+
+            else:
+                description_label = tk.Label(info_window, text="No special information available for this box.")
+                description_label.pack(pady=5)
+
+    def update_iptable_script(self, ports, info_window):
+        # Update the script with the selected ports
+        new_script = f"""hardenIpTables1(){{
+    # Flush existing rules
+    sudo iptables -F
+
+    # Set default policies to DROP
+    sudo iptables -P INPUT DROP
+    sudo iptables -P FORWARD DROP
+    sudo iptables -P OUTPUT ACCEPT
+
+    sudo iptables -A INPUT -p tcp --dports {ports} -j ACCEPT
+
+    
+    # Allow loopback traffic
+    sudo iptables -A INPUT -i lo -j ACCEPT
+    sudo iptables -A OUTPUT -o lo -j ACCEPT
+
+    # Allow custom incoming ports
+    sudo iptables -A INPUT -p tcp --dports {ports} -j ACCEPT
+
+    # Display the rules
+    sudo iptables -L INPUT -n
+}}
+
+hardenIpTables1
+"""
+        # Update the script file (you may want to adjust the path accordingly)
+        script_file_1 = os.getcwd()
+
+        script_file_path = "config/B_scripts/hardenIpTables1.sh"
+        with open(script_file_path, "w") as script_file:
+            script_file.write(new_script)
+
+        # Inform the user
+        messagebox.showinfo("Script Updated", "Script has been updated with the selected ports.")
+
+        # Close the info window
+        info_window.destroy()
 
 class GUI:
     def __init__(self, master, data):
