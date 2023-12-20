@@ -218,35 +218,45 @@ def harden_now(selected_items):
         print(f"Hardening NOW for {selected_item}")
         selected_id, selected_exec_file = find_selected_details(selected_item, data)
         execute_script_and_display_result(selected_exec_file)
-
+        
 def execute_script_and_display_result(exec_file):
     output_frame = ctk.CTkFrame(app, corner_radius=3)
-    output_label=ctk.CTkLabel(output_frame,text="Script Execution Result", font=("Arial", 24))
+    output_label = ctk.CTkLabel(output_frame, text="Script Execution Result", font=("Arial", 24))
     output_label.grid(row=0, column=0, padx=20, pady=10, sticky="w")
-  # Set the parent window
 
+    # Set the parent window
     output_text = ctk.CTkTextbox(output_frame, wrap=ctk.WORD, width=500, height=300, font=("Arial", 12))
     output_text.grid(row=1, column=0, padx=20, pady=10, sticky="w")
+
     def show_frame():
-        hide_all_screens()  
+        hide_all_screens()
         output_frame.grid(row=0, column=0, padx=16, pady=20, rowspan=3, columnspan=3, sticky="nsew")
         app.update()
-    
+
     show_frame()
 
     try:
-        current_dir = os. getcwd()
+        current_dir = os.getcwd()
         print(current_dir)
-        scriptFile = current_dir + "/" + exec_file
-        print(scriptFile)
+        script_file = os.path.join(current_dir, exec_file)
+        print(script_file)
+
+        # Run the script and capture the stdout
         process = subprocess.run(['bash', exec_file], text=True, stdout=subprocess.PIPE, check=True)
-        output_text.insert(ctk.END, process.stdout)
+
+        # Write the stdout to the output.txt file
+        with open('output.txt', 'w') as output_file:
+            output_file.write(process.stdout)
+
+        # Read the content of output.txt and insert it into the output_text widget
+        with open('output.txt', 'r') as output_file:
+            output_content = output_file.read()
+            output_text.insert(ctk.END, output_content)
+
     except subprocess.CalledProcessError as e:
         output_text.insert(ctk.END, f"Error executing script:\n{e}")
 
     output_frame.grab_set()
-      # Make the output window modal
-
 
 def find_selected_details(selected_name, data):
     for id, details in data.items():

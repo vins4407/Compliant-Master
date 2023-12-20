@@ -10,3 +10,7 @@ Execution COmpleted
 ssh is command is runnig
 backup is taken
 Execution COmpleted 
+
+
+
+the execution of this scrirp ended 

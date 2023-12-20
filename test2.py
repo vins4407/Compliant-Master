@@ -5,7 +5,7 @@ import subprocess
 
 def get_existing_rules():
     try:
-        result = subprocess.run(['sudo','iptables', '-L', '-n', '--line-numbers'], capture_output=True, text=True)
+        result = subprocess.run(['sudo','iptables', '-L','INPUT', '-n', '--line-numbers'], capture_output=True, text=True)
         existing_rules = result.stdout
         return existing_rules
     except Exception as e:

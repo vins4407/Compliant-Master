@@ -43,28 +43,28 @@ for i in range(5):
     l3=Label(w, image=image_b, border=0, relief=SUNKEN).place(x=220, y=145)
     l4=Label(w, image=image_b, border=0, relief=SUNKEN).place(x=240, y=145)
     w.update_idletasks()
-    time.sleep(0.3)
+    time.sleep(0.1)
 
     l1=Label(w, image=image_b, border=0, relief=SUNKEN).place(x=180, y=145)
     l2=Label(w, image=image_a, border=0, relief=SUNKEN).place(x=200, y=145)
     l3=Label(w, image=image_b, border=0, relief=SUNKEN).place(x=220, y=145)
     l4=Label(w, image=image_b, border=0, relief=SUNKEN).place(x=240, y=145)
     w.update_idletasks()
-    time.sleep(0.3)
+    time.sleep(0.1)
 
     l1=Label(w, image=image_b, border=0, relief=SUNKEN).place(x=180, y=145)
     l2=Label(w, image=image_b, border=0, relief=SUNKEN).place(x=200, y=145)
     l3=Label(w, image=image_a, border=0, relief=SUNKEN).place(x=220, y=145)
     l4=Label(w, image=image_b, border=0, relief=SUNKEN).place(x=240, y=145)
     w.update_idletasks()
-    time.sleep(0.3)
+    time.sleep(0.1)
 
     l1=Label(w, image=image_b, border=0, relief=SUNKEN).place(x=180, y=145)
     l2=Label(w, image=image_b, border=0, relief=SUNKEN).place(x=200, y=145)
     l3=Label(w, image=image_b, border=0, relief=SUNKEN).place(x=220, y=145)
     l4=Label(w, image=image_a, border=0, relief=SUNKEN).place(x=240, y=145)
     w.update_idletasks()
-    time.sleep(0.3)
+    time.sleep(0.1)
 
 
 

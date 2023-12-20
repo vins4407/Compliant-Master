@@ -4,6 +4,7 @@ import subprocess
 import customtkinter
 import sys
 from helpers import *
+from ss import * 
 
 customtkinter.set_default_color_theme("green")
 app = ctk.CTk()
@@ -37,17 +38,25 @@ def button_click(responsibility):
     if responsibility == "Responsibility 1":
         show_screen_policy()
     elif responsibility == "Responsibility 2":
-        print("Check Compliant Status clicked")
+        print("Audit SYstem Clicked")
     elif responsibility == "Responsibility 3":
         print("Reports clicked")
     elif responsibility == "Responsibility 4":
         print("Roll back clicked")
     elif responsibility == "Responsibility 5":
-        print("Schedule task clicked")
+        print("Manual Hardennign")
     elif responsibility == "Responsibility 6":
         print("Full Scan clicked")
     else:
-        print(f"Additional Responsibility clicked: {responsibility}")
+      if responsibility == "Additional Responsibility":
+        show_report()  
+
+
+
+def  show_report():
+     subprocess.run(["python3", "ss.py"])
+
+        
 
 def hide_all_screens():
     for widget in app.winfo_children():
@@ -82,10 +91,10 @@ logout_button.grid(row=0, column=2, padx=20, pady=20, sticky="e")
 
 buttons_info = [
     {"name": "Start Hardening", "responsibility": "Responsibility 1"},
-    {"name": "Check Compliant Status", "responsibility": "Responsibility 2"},
+    {"name": "Audit System", "responsibility": "Responsibility 2"},
     {"name": "Reports", "responsibility": "Responsibility 3"},
     {"name": "Roll back", "responsibility": "Responsibility 4"},
-    {"name": "Schedule task", "responsibility": "Responsibility 5"},
+    {"name": "Manual Hardenning this is" , "responsibility": "Responsibility 5"},
     {"name": "Full Scan", "responsibility": "Responsibility 6"},
 ]
 
