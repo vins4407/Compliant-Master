@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
 from tkinter import messagebox
 import json
 import os
@@ -139,7 +138,7 @@ class GUI:
             self.custom_boxes.append(custom_box)
             custom_box.grid(row=len(self.custom_boxes)//3, column=len(self.custom_boxes)%3, padx=10, pady=10)
 
-        submit_button = tk.Button(master, text='Submit', command=self.submit)
+        submit_button = tk.Button(master, text='Submit', command=lambda:on_submit(data, self.selected_objects),)
         submit_button.grid(row=2, column=0, pady=10)
 
         self.exec_files = []
@@ -182,9 +181,9 @@ class GUI:
             box.set_color()
             self.on_box_click(box)
 
-    def submit(self):
-        print(f"Selected objects: {self.selected_objects}")
-        print(f"Selected exec files: {self.exec_files}")
+
+
+
 
 def main():
     # Load data from JSON file
