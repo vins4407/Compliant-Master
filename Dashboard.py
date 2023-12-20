@@ -5,6 +5,8 @@ import customtkinter
 import sys
 from helpers import *
 from ss import * 
+from test import * 
+
 
 customtkinter.set_default_color_theme("green")
 app = ctk.CTk()
@@ -45,8 +47,9 @@ def button_click(responsibility):
         print("Roll back clicked")
     elif responsibility == "Responsibility 5":
         print("Manual Hardennign")
+        
     elif responsibility == "Responsibility 6":
-        print("Full Scan clicked")
+        print("Still under process")
     else:
       if responsibility == "Additional Responsibility":
         show_report()  
@@ -69,7 +72,7 @@ def show_screen_policy():
 
 def create_policy():
     app.destroy()
-    subprocess.run(["python3", "Createpolicy.py"])
+    subprocess.run(["python3", "test7.py"])
     app.destroy()
 
 # Frame-Main
@@ -78,9 +81,9 @@ main_frame.grid(row=0, column=0, sticky="nsew")
 
 
 # Background
-pil_image = Image.open("./assets/jojo.jpg")
-ctk_image = ctk.CTkImage(pil_image)
-background_label = ctk.CTkLabel(main_frame, image=ctk_image, text="", compound="center")
+# pil_image = Image.open("./assets/jojo.jpg")
+# ctk_image = ctk.CTkImage(pil_image)
+background_label = ctk.CTkLabel(main_frame, text="", compound="center")
 background_label.grid(row=0, column=0, rowspan=4, columnspan=3, sticky="nsew")
 
 welcome_label = ctk.CTkLabel(main_frame, text="Welcome Root", font=("Arial", 24))
@@ -94,7 +97,7 @@ buttons_info = [
     {"name": "Audit System", "responsibility": "Responsibility 2"},
     {"name": "Reports", "responsibility": "Responsibility 3"},
     {"name": "Roll back", "responsibility": "Responsibility 4"},
-    {"name": "Manual Hardenning this is" , "responsibility": "Responsibility 5"},
+    {"name": "Manual Hardenning" , "responsibility": "Responsibility 5"},
     {"name": "Full Scan", "responsibility": "Responsibility 6"},
 ]
 

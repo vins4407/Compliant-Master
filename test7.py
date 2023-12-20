@@ -30,7 +30,7 @@ def load_data(file_path):
         return {}
 
 
-def on_submit(data, selected_option_list):
+def on_submit(data, selected_option_list, app):
 
     destination_path = os.getcwd()
 
@@ -55,11 +55,11 @@ def on_submit(data, selected_option_list):
     if not selected_option_list:
         CTkMessagebox(title="Warning Message!", message="Unable to connect!", icon="warning", option_1="Cancel", option_2="Retry")
         return
-    show_confirmation_screen(selected_option_list,data)
+    show_confirmation_screen(selected_option_list,data , app)
 
 
 
-def show_confirmation_screen(selected_items,json_data):
+def show_confirmation_screen(selected_items,json_data , app):
     popup = ctk.CTk()
     popup.title("Confirmation")
 
@@ -80,7 +80,7 @@ def show_confirmation_screen(selected_items,json_data):
 
     def harden_now_wrapper():
         popup.destroy()
-        harden_now(selected_items,json_data)
+        harden_now(selected_items,json_data,app)
 
 
 
@@ -99,13 +99,14 @@ def show_confirmation_screen(selected_items,json_data):
 
     popup.mainloop()
 
-def harden_now(selected_items,json_data):
+def harden_now(selected_items,json_data , app):
     for selected_item in selected_items:
         print(f"Hardening NOW for {selected_item}")
         selected_id, selected_exec_file = find_selected_details(selected_item, json_data)
-        execute_script_and_display_result(selected_exec_file)
+        execute_script_and_display_result(selected_exec_file, app)
 
-def execute_script_and_display_result(exec_file):
+def execute_script_and_display_result(exec_file,app):
+    
     output_frame = ctk.CTkFrame(app, corner_radius=3)
     output_label=ctk.CTkLabel(output_frame,text="Script Execution Result", font=("Arial", 24))
     output_label.grid(row=0, column=0, padx=20, pady=10, sticky="w")
@@ -114,7 +115,6 @@ def execute_script_and_display_result(exec_file):
     output_text = ctk.CTkTextbox(output_frame, wrap=ctk.WORD, width=500, height=300, font=("Arial", 12))
     output_text.grid(row=1, column=0, padx=20, pady=10, sticky="w")
     def show_frame():
-        hide_all_screens()  
         output_frame.grid(row=0, column=0, padx=16, pady=20, rowspan=3, columnspan=3, sticky="nsew")
         app.update()
     
@@ -145,10 +145,6 @@ def on_double_left_click(event, source_listbox, destination_listbox):
     cur_item = source_listbox.get(cur_index)
     source_listbox.delete(cur_index)
     destination_listbox.insert(tk.END, cur_item)
-
-def exit():
-    app.destroy()
-    subprocess.run(["python3", "Dashboard.py", "--show-frame", "Options"])
 
 
 
@@ -287,7 +283,7 @@ class GUI:
             self.custom_boxes.append(custom_box)
             custom_box.grid(row=len(self.custom_boxes)//3, column=len(self.custom_boxes)%3, padx=10, pady=10)
 
-        submit_button = tk.Button(master, text='Submit', command=lambda:on_submit(data, self.selected_objects),)
+        submit_button = tk.Button(master, text='Submit', command=lambda:on_submit(data, self.selected_objects , master),)
         submit_button.grid(row=2, column=0, pady=10)
 
         self.exec_files = []

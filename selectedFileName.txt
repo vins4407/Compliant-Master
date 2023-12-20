@@ -1,3 +1,1 @@
-DisableLoginWithRoot
-Restrict SSH
-Block POP3
+Block TCP Sync
