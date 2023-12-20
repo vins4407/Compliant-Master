@@ -1,4 +1,0 @@
-Restrict SSH
-DisableLoginWithRoot
-Block POP3
-Enable Auditd
