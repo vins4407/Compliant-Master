@@ -47,8 +47,6 @@ def on_submit(data, selected_option_list):
 
 
             # Display a success message
-                CTkMessagebox(message="Success! file downloaded successfully.",
-                  icon="check", option_1="Done")
 
     except Exception as e:
         # Display an error message if something goes wrong
