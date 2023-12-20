@@ -16,6 +16,14 @@ disable_tor(){
             echo "Error disabling Tor: $result"
         fi
 
+        echo "Initial check for blocking tor completed !! " 
+        # Block TOR connections using iptables
+
+        sudo iptables -A OUTPUT -p tcp --dport 9001 -j DROP
+        sudo iptables -A OUTPUT -p udp --dport 9001 -j DROP
+        echo "TOR connections blocked."
+
+
         echo "Tor has been disabled."
 
         }
