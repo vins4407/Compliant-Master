@@ -2,8 +2,10 @@
     "name": "Block Bluetooth",
     "tag": [
         "1",
-        "HIPPA",
-        "CIS"
+        "abcd",
+        "CIS",
+        "Hippa"
+
     ],
     "execFile": "config/B_scripts/1-blockBluetooth.sh"
 },
@@ -11,7 +13,7 @@
     "name": "Delete FTP,Telnet, RSH",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
     ],
     "execFile": "config/B_scripts/4-blockFtpTelnetOtherservices.sh"
@@ -20,7 +22,7 @@
     "name": "Remove Unwanted Packages",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
     ],
     "execFile": "config/B_scripts/7-delUnusedPackages.sh"
@@ -29,7 +31,7 @@
     "name": "Restrict FailAttemp on SSH",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
     ],
     "execFile": "config/B_scripts/3-blockFailAttemptOnSSH.sh"
@@ -39,7 +41,7 @@
     "name": "Block older TLS",
     "tag": [
         "1",
-        "Hippa"
+        "abcd"
         
     ],
     "execFile": "config/B_scripts/5-blockOlderTLS.sh"
@@ -49,7 +51,7 @@
     "name": "Block TOR Traffic",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
     ],
     "execFile": "config/B_scripts/10-blockTOR.sh"
@@ -59,7 +61,7 @@
     "name": "Restrict SSH",
     "tag": [
         "2",
-        "HIPPA",
+        "abcd",
         "CIS"
     ],
     "execFile": "config/B_scripts/6-blockSSH.sh"
@@ -68,7 +70,7 @@
     "name": "Latest Update",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
     ],
     "execFile": "config/otherScript/latestUpdate.sh"
@@ -77,7 +79,7 @@
     "name": "Auto Update",
     "tag": [
         "2",
-        "HIPPA",
+        "abcd",
         "CIS"
     ],
     "execFile": "config/otherScript/autoUpdate.sh"
@@ -87,7 +89,7 @@
     "name": "DisableLoginWithRoot",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/otherScript/8-disableLoginWithRoot.sh"
@@ -97,7 +99,7 @@
     "name": "Disbale Network",
     "tag": [
         "2",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/11-blockWifi.sh"
@@ -108,7 +110,7 @@
     "name": "Block IMAP",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/12-blockIMapd.sh"
@@ -119,7 +121,7 @@
     "name": "Block POP3",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/13-blockPop3.sh"
@@ -128,7 +130,7 @@
     "name": "Block IPV6",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/14-blockIPV6.sh"
@@ -138,7 +140,7 @@
     "name": "Block ICMP",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/15-blockICMP.sh"
@@ -147,7 +149,7 @@
     "name": "Block TCP Sync",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/16-enableTCPSync.sh"
@@ -156,7 +158,7 @@
     "name": "Enable Auditd",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/17-enableauditd.sh"
@@ -168,7 +170,7 @@
     "name": "Enable UFW",
     "tag": [
         "2",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/18-enableUFW.sh"
@@ -176,7 +178,7 @@
     "name": "Enable Auditd",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/17-enableauditd.sh"
@@ -184,7 +186,7 @@
     "name": "Block SAMBA",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/19-blockSAMBA.sh"
@@ -195,7 +197,7 @@
     "name": "Block SNMP",
     "tag": [
         "2",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/20-blockSNMP.sh"
@@ -205,7 +207,7 @@
     "name": "Block Web Access",
     "tag": [
         "2",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/blockWebAccess.sh"
@@ -215,7 +217,7 @@
     "name": "Secure IP Tables ",
     "tag": [
         "1",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/hardenIpTables1.sh"
@@ -226,7 +228,7 @@
     "name": "Secure IP Tables - 2",
     "tag": [
         "2",
-        "HIPPA",
+        "abcd",
         "CIS"
    ],
     "execFile": "config/B_scripts/hardenIpTables2.sh"

@@ -69,7 +69,7 @@ def load_data(file_path):
 
 def on_submit(data, selected_option_list):
     
-    print("Selected Items:", selected_option_list)
+
     destination_path = os.getcwd()
 
     try:
@@ -101,7 +101,6 @@ def on_submit(data, selected_option_list):
 def show_confirmation_screen(selected_items,json_data):
     popup = ctk.CTk()
     popup.title("Confirmation")
-    print("json here",json_data)
 
     window_width = 300
     window_height = 200
@@ -166,9 +165,7 @@ def execute_script_and_display_result(exec_file):
 
     try:
         current_dir = os. getcwd()
-        print(current_dir)
         scriptFile = current_dir + "/" + exec_file
-        print(scriptFile)
         process = subprocess.run(['bash', exec_file], text=True, stdout=subprocess.PIPE, check=True)
         output_text.insert(ctk.END, process.stdout)
     except subprocess.CalledProcessError as e:
@@ -224,12 +221,7 @@ class MyTabView(ctk.CTkTabview):
 
             checkboxes_tab = []
             for key, policy in self.json_data.items():
-                print(key)
-                print(policy)
                 tags = policy.get("tag", [])
-                print(tags)
-                print(tab_name)
-                print(policy["name"])
                 if tab_name in tags:
                     checkbox_var = ctk.IntVar()
                     checkbox = ctk.CTkCheckBox(frame, text=policy["name"], variable=checkbox_var, font=("Arial", 14))
