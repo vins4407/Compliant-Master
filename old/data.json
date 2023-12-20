@@ -1,0 +1,95 @@
+{"1": {
+    "name": "Block Bluetooth",
+    "tag": [
+        "1",
+        "CISF"
+    ],
+    "execFile": "config/B_scripts/1-blockBluetooth.sh"
+},
+"2": {
+    "name": "Delete FTP,Telnet,RSH",
+    "tag": [
+        "1"
+    ],
+    "execFile": "config/B_scripts/4-blockFtpTelnetOtherservices.sh"
+},
+"3": {
+    "name": "Removeunusedpackages",
+    "tag": [
+        "1"
+        ,
+        "CISF"
+    ],
+    "execFile": "config/B_scripts/7-delUnusedPackages.sh"
+},
+"4": {
+    "name": "RestrictBruteforeceonTCP",
+    "tag": [
+        "2"
+        ,
+        "CISF"
+        ,
+        "hippa"
+    ],
+    "execFile": "config/B_scripts/3-blockFailAttemptOnSSH.sh"
+},
+
+"5": {
+    "name": "Block older TLS",
+    "tag": [
+        "1",
+        "hippa"
+        
+    ],
+    "execFile": "config/B_scripts/5-blockOlderTLS.sh"
+},
+
+"6": {
+    "name": "Block TOR",
+    "tag": [
+        "3",
+        "2"
+        ,
+        "hippa"
+    ],
+    "execFile": "config/B_scripts/10-blockTOR.sh"
+},
+
+"7": {
+    "name": "Restrict SSH",
+    "tag": [
+        "1"
+        ,
+        "hippa"
+    ],
+    "execFile": "config/B_scripts/2-blockSSH.sh"
+},
+"8": {
+    "name": "Latest Update",
+    "tag": [
+        "1"
+        ,
+        "CISF"
+    ],
+    "execFile": "config/otherScript/latestUpdate.sh"
+},
+"9": {
+    "name": "Auto Update",
+    "tag": [
+        "1"
+        ,
+        "hippa"
+    ],
+    "execFile": "config/otherScript/autoUpdate.sh"
+},
+
+"10": {
+    "name": "DisableLoginWithRoot",
+    "tag": [
+        "1"
+        ,
+        "CISF"
+    ],
+    "execFile": "/config/otherScript/8-disableLoginWithRoot.sh"
+}
+}
