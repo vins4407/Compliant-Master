@@ -17,12 +17,13 @@ screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 
 window_width = 600
-window_height = 600
+window_height = 500
 
 x_position = (screen_width - window_width) // 2
 y_position = (screen_height - window_height) // 2
 
 app.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
+
 
 def button_function():
     username = entry1.get()  # Get the entered username
@@ -42,14 +43,17 @@ def button_function():
 
 
 
-img1 = ImageTk.PhotoImage(Image.open("./assets/jojo.jpg"))
-l1 = customtkinter.CTkLabel(master=app, image=img1)
-l1.pack()
+my_image = customtkinter.CTkImage(light_image=Image.open("./assets/jojo.jpg"),
+                                  dark_image=Image.open("./assets/jojo.jpg"),
+                                  size=(600, 600))
 
-frame = customtkinter.CTkFrame(master=l1, width=320, height=360, corner_radius=15)
+image_label = customtkinter.CTkLabel(app, image=my_image)  # display image with a CTkLabel
+image_label.pack()
+
+frame = customtkinter.CTkFrame(master=image_label, width=320, height=360, corner_radius=20 )
 frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
-l2 = customtkinter.CTkLabel(master=frame, text="PLease Verify you're Root", font=('Century Gothic', 20))
+l2 = customtkinter.CTkLabel(master=frame, text="Please verify you are Root", font=('Century Gothic', 20))
 l2.place(x=50, y=45)
 
 entry1 = customtkinter.CTkEntry(master=frame, width=220, placeholder_text='Username')

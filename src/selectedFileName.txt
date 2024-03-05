@@ -1,0 +1,3 @@
+Block IPV6
+Block POP3
+Block IMAP

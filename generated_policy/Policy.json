@@ -1,0 +1,26 @@
+{
+  "7": {
+    "name": "Restrict SSH",
+    "tag": [
+      "CIS_Level-2",
+      "HIPPA"
+    ],
+    "isSpecialCase": "no"
+  },
+  "8": {
+    "name": "Latest Update",
+    "tag": [
+      "CIS_Level-1",
+      "HIPPA"
+    ],
+    "isSpecialCase": "no"
+  },
+  "1011": {
+    "name": "Disbale Network",
+    "tag": [
+      "CIS_Level-2",
+      "HIPPA"
+    ],
+    "isSpecialCase": "no"
+  }
+}

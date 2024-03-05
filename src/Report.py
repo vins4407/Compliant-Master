@@ -180,6 +180,10 @@ class ReportGeneratorApp:
         return formatted_info
 
 if __name__ == "__main__":
-    root = tk.Tk()
+    root = ctk.CTk()
+    ctk.set_appearance_mode("System")  # Modes: system (default), light, dark
+    ctk.set_default_color_theme("green")  # Themes: blue (default), dark-blue, green
+
     app = ReportGeneratorApp(root)
+
     root.mainloop()

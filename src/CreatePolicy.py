@@ -10,16 +10,16 @@ import os
 import zipfile
 from helpers import *
 from tkinter import StringVar
-from ScriptGenerateTK  import *
 from generatePolicy import *
+import os
+import sys
+from ScriptGenerateTK  import *
 
 
 
 def hide_all_screens():
     for widget in app.winfo_children():
         widget.grid_forget()
-
-
 
 def load_data(file_path):
     try:
@@ -73,10 +73,14 @@ def show_confirmation_screen(selected_items,json_data , app):
     y_position = (screen_height - window_height) // 2
 
     popup.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    json_file_path = os.path.join(current_dir, "..", "data.json")
+    policy_file_path = os.path.join(current_dir,"..", "generated_policy/Policy.json")
+
 
     def download_Json_wrapper():
         popup.destroy()
-        generateJson(selected_items,"data.json","Policy.json")
+        generateJson(selected_items, json_file_path,policy_file_path)
 
     def harden_now_wrapper():
         popup.destroy()
@@ -332,11 +336,14 @@ class GUI:
 
 def main():
     # Load data from JSON file
-    with open("data.json", "r") as json_file:
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    json_file_path = os.path.join(current_dir, "..", "data.json")
+
+    with open(json_file_path, "r") as json_file:
         data = json.load(json_file)
 
     root = tk.Tk()
-    root.title("Custom Color Boxes Selector")
+    root.title("Create Policy")
 
     gui = GUI(root, data)
 
